@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <form action="login.php" method="POST" id="myForm">
+        <h2>Login</h2>
+        <div class="input-field">
+          <input type="text"  name="username" required />
+          <label>Username</label>
+        </div>
+        <div class="input-field">
+          <input type="password" name="password" required />
+          <label>Enter your password</label>
+        </div>
+        <div id="response"></div>
+        <div class="forget"></div>
+        <button type="submit">Log In</button>
+        <img
+          style="width: 40%; height: 3rem; margin: auto; margin-top: 2rem"
+          src="green_logo.png"
+          alt="comapny logo"
+        />
+      </form>
+    </div>
+   <!-- <script>
+      document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        var formData = new FormData(this);
+
+        // Create an AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'login.php', true);
+
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            console.log(response);
+            if (response.success) {
+              document.getElementById('response').textContent = "Successfully submitted!";
+              // Optionally redirect or perform other actions upon successful login
+            } else {
+              document.getElementById('response').textContent = 'Incorrect username or password.';
+              document.getElementById('myForm').reset();
+            }
+          } else {
+            document.getElementById('response').textContent = 'An error occurred while submitting the form.';
+          }
+        };
+
+        xhr.send(formData); // Send the form data
+      });
+    </script> -->
+
+  </body>
+</html>

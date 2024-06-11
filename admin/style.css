@@ -1,0 +1,41 @@
+
+.table{
+    width: 90%;
+    position: relative;
+    left: 5%;
+
+}
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 0.5rem;
+    letter-spacing: 1px;
+}
+.logo{
+    position: relative;
+    left: 40%;
+
+}
+.se{
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#search{
+    width: 50rem;
+    border-radius: 10px;
+    background-color: transparent;
+    height: 2rem;
+}
+.se label{
+    font-size: 1.3rem;
+}
+.hidden {
+    display: none;
+}
+.container{
+    height: auto;
+}
