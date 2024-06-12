@@ -6,6 +6,11 @@
     <title>view database</title>
     <link rel="stylesheet" href="style.css">
 <script defer src="script.js"></script>
+<link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+ 
 
 </head>
 <body>
@@ -16,9 +21,9 @@
             </div>
             <div class="se">
                  <form method="POST"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="form">
-                    <label for="search" >Search:</label>
-                    <input type="text" id="search" name="search_term">
-                    <button type="submit" id="search-form" class="s">Search</button>
+                    <!-- <label for="search" >Search:</label> -->
+                    <input type="text" id="search" name="search_term" placeholder="Search :">
+                    <button type="submit" id="search-form" class="button"><img class="search_button" src="observation.png" alt=""></button>
                 </form>
             </div>
             <div id="ta" >
@@ -61,16 +66,8 @@
                             // Check if any results found
                     if (!empty($_POST["search_term"])) {
                         if ($result && mysqli_num_rows($result) > 0) {
-                            echo '<div style="
-                                
-                                width: 90%;
-                                position: relative;
-                                left: 5%;
-                                margin-top= 10rem;
-                                
-                                
-                                ">';
-                            echo '<table>';
+                            echo '<div style=" border-radius: 10px;">';
+                            echo '<table class="table">';
                             echo '<tr>';
                             echo '<th>ID</th>';
                             echo '<th>NAME</th>';
@@ -79,6 +76,7 @@
                             echo '<th>DOB</th>';
                             echo '<th>PHONE-NO</th>';
                             echo '<th>ADDITIONAL NUMBER</th>';
+                            echo '<th>ADDERSS</th>';
                             echo '<th>FATHER NAME</th>';
                             echo '<th>MOTHER NAME</th>';
                             echo '<th>GENDER</th>';
