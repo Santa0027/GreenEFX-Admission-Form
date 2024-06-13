@@ -1,236 +1,127 @@
 <?php
 
+// Validate that the request method is POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
-  $first_name = $_POST['first_name'];
-  $last_name = $_POST['last_name'];
-  $full_name = $first_name;
-  $email = $_POST['email'];
-  $date = $_POST['date'];
-  $month = $_POST['month'];
-  $year = $_POST['year'];
-  $DOB = $date . "/" . $month . "/" . $year;
-  $phone = $_POST['phone'];
-  $addi_phone = $_POST['secound_phone'];
-  $address = $_POST['address'];
-  $f_name = $_POST['father_name'];
-  $m_name = $_POST['mother_name'];
-  $gender = $_POST['gender'];
-  $qualification = $_POST['qualification'];
-  $feild_status = $_POST['feild_status'];
-  $course = $_POST['course'];
-  $fees = "";
-$date = date("d/m/Y");
- 
-
-  function generateStudentID($id)
-  {
-    $prefix = "GFX_2K" . date("Y");
-    return $prefix . $id;
-  }
-
-
-  switch ($course) {
-    case "DTP":
-      //code block
-      $fees = "Rs.6000/-";
-      break;
-    case "DCA":
-      //code block;
-      $fees = "Rs.6000/-";
-      break;
-    case "PGDCA":
-      //code block
-      $fees = "Rs.12,000/-";
-      break;
-    case "DIPLOMA IN GRAPHICS DESIGNING":
-      $fees = "Rs.12,000/-";
-      //code block
-      break;
-    case "DIPLOMA IN WEB DESIGNING":
-      //code block
-      $fees = "Rs.12,000/-";
-      break;
-    case "DIPLOMA IN VIDEO EDITING":
-      //code block
-      $fees = "Rs.12,000/-";
-      break;
-    case "DIPLOMA IN UI/UX DESIGNING":
-      //code block
-      $fees = "Rs.12,000/-";
-      break;
-    case "Graphics Crash Course":
-      //code block
-      $fees = "Rs.16,000/-";
-      break;
-    case "Diploma in 3D & VFX":
-      //code block
-      $fees = "Rs.30,000/-";
-      break;
-    case "Advance Diploma in 3D & VFX":
-      //code block
-      $fees = "Rs.60,000/-";
-      break;
-    case "Specialized in Advance Houdini Effects":
-      //code block
-      $fees = "Rs.1,00,000/-";
-      break;
-    case "Specialized in Advance Digital Crowd":
-      //code block
-      $fees = "Rs.1,00,000/-";
-      break;
-    case "Specialized in Advance Character Effects":
-      //code block
-      $fees = "Rs.1,00,000/-";
-      break;
-    case "Specialized in Advance Character Animation":
-      //code block
-      $fees = "Rs.1,00,000/-";
-      break;
-    default:
-    //code block
-  }
-
-
-
-
-  // database crediniate
+  // Database credentials
   $db_server = "localhost";
   $db_user = "root";
   $db_pass = "";
   $db_name = "greenefx_database";
-  $con = "";
-  $con = mysqli_connect(
-    $db_server,
-    $db_user,
-    $db_pass,
-    $db_name
-  );
-  if($con){
-    echo"connected";
-  }else{
-    echo "disconnected";
+
+  // Connect to the database
+  $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
+
+  // Check connection
+  if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
   }
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-  $last_id = $con->insert_id;
-  $student_id = generateStudentID($last_id);
+  // Sanitize and validate input data
+  $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
+  $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
+  $full_name = $first_name . ' ' . $last_name;
+  $email = mysqli_real_escape_string($con, $_POST['email']);
+  $date = mysqli_real_escape_string($con, $_POST['date']);
+  $month = mysqli_real_escape_string($con, $_POST['month']);
+  $year = mysqli_real_escape_string($con, $_POST['year']);
+  $DOB = $date . "/" . $month . "/" . $year;
+  $phone = mysqli_real_escape_string($con, $_POST['phone']);
+  $addi_phone = mysqli_real_escape_string($con, $_POST['secound_phone']);
+  $address = mysqli_real_escape_string($con, $_POST['address']);
+  $f_name = mysqli_real_escape_string($con, $_POST['father_name']);
+  $m_name = mysqli_real_escape_string($con, $_POST['mother_name']);
+  $gender = mysqli_real_escape_string($con, $_POST['gender']);
+  $qualification = mysqli_real_escape_string($con, $_POST['qualification']);
+  $feild_status = mysqli_real_escape_string($con, $_POST['feild_status']);
+  $course = mysqli_real_escape_string($con, trim($_POST['course']));
 
+  // Print the course value for debugging
+
+
+  // Convert course to lowercase for case-insensitive comparison
+  $course = strtolower($course);
+
+  // Current date
+  $current_date = date("d/m/Y");
+
+  // Determine fees based on the course
+  $fees = "";
+  switch ($course) {
+    case "dtp":
+    case "dca":
+      $fees = "Rs.6000/-";
+      break;
+    case "pgdca":
+    case "diploma in graphics designing":
+    case "diploma in web designing":
+    case "diploma in video editing":
+    case "diploma in ui/ux designing":
+      $fees = "Rs.12,000/-";
+      break;
+    case "graphics crash course":
+      $fees = "Rs.16,000/-";
+      break;
+    case "diploma in 3d & vfx":
+      $fees = "Rs.30,000/-";
+      break;
+    case "advance diploma in 3d & vfx":
+      $fees = "Rs.60,000/-";
+      break;
+    case "specialized in advance houdini effects":
+    case "specialized in advance digital crowd":
+    case "specialized in advance character effects":
+    case "specialized in advance character animation":
+      $fees = "Rs.1,00,000/-";
+      break;
+    default:
+      $fees = "N/A";
+  }
+
+  // Print the fees value for debugging
+
+  // Check if an image was uploaded
   if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name'])) {
-
-
-    $image = $_FILES['image']['tmp_name'];
-    $name = $_FILES['image']['name'];
-    $image = file_get_contents($image);
+    $image = file_get_contents($_FILES['image']['tmp_name']);
     $image = base64_encode($image);
-    
-    $sql = "INSERT INTO student_details(STUDENT_ID,C_NAME,PHOTO,A_DATE,EMAIL,DOB,PHONE_NO,PHONE_2,C_ADDRESS,F_NAME,M_NAME,GENDER,QUALIFICATION,FEILD_OF_WORK,COURSE,FEES)
-              VALUE('$student_id','$full_name','$image','$date','$email','$DOB','$phone','$addi_phone','$address','$f_name','$m_name','$gender','$qualification','$feild_status','$course','$fess')";
-
   } else {
-    // If no image was uploaded, insert data with an empty PHOTO field
-    $sql = "INSERT INTO student_details(STUDENT_ID,C_NAME,PHOTO,A_DATE,EMAIL,DOB,PHONE_NO,PHONE_2,C_ADDRESS,F_NAME,M_NAME,GENDER,QUALIFICATION,FEILD_OF_WORK,COURSE,FEES)
-              VALUE('$student_id','$full_name',' ','$date','$email','$DOB','$phone','$addi_phone','$address','$f_name','$m_name','$gender','$qualification','$feild_status','$course','$fees')";
+    $image = '';
   }
 
-  if ($con->query($sql) === TRUE) {
-    echo"inserted";
-    $response = array("success" => true, "message" => "New record created successfully");
+  // Insert a preliminary record without STUDENT_ID
+  $stmt = $con->prepare("INSERT INTO student_details (C_NAME, PHOTO, A_DATE, EMAIL, DOB, PHONE_NO, PHONE_2, C_ADDRESS, F_NAME, M_NAME, GENDER, QUALIFICATION, FEILD_OF_WORK, COURSE, FEES) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param("sssssssssssssss", $full_name, $image, $current_date, $email, $DOB, $phone, $addi_phone, $address, $f_name, $m_name, $gender, $qualification, $feild_status, $course, $fees);
+
+  if ($stmt->execute()) {
+    // Get the last inserted ID to generate a student ID
+    $last_id = $con->insert_id;
+    $student_id = generateStudentID($last_id);
+
+    // Update the record with the generated student ID
+    $update_stmt = $con->prepare("UPDATE student_details SET STUDENT_ID = ? WHERE id = ?");
+    $update_stmt->bind_param("si", $student_id, $last_id);
+
+    if ($update_stmt->execute()) {
+      echo "successfully with Student ID: $student_id";
+    } else {
+      echo "Error updating record: " ;
+    }
+
+    $update_stmt->close();
   } else {
-    echo "not";
-    $response = array("success" => false, "message" => "Error: " . $sql . "<br>" . $con->error);
-
-    // ... (further processing based on the query result)
+    echo "Error: " . $stmt->error;
   }
 
+  // Close statement and connection
+  $stmt->close();
+  $con->close();
+}
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // $image = empty( $_POST['image'] ) ? " ": $_POST['image'];
-    // $name = empty( $_POST['name'] ) ? " ": $_POST['name'];
-    // $image = file_get_contents($image);
-    // $image = base64_encode($image);
-    // // $sql="INSERT INTO img (NAME, IMAGE) VALUES ('$name', '$image')";
-    // $sql = "INSERT INTO enquiry_data (C_NAME,PHOTO,EMAIL,DOB,PHONE_NO,ADD_NUMBER,C_ADDRESS,F_NAME,M_NAME,GENDER,QUALIFICATION,FEILD_OF_WORK,COURSE)
-    //       VALUE('$full_name','$image','$email','$DOB','$phone','$addi_phone','$address','$f_name','$m_name','$gender','$qualification','$feild_status','$course')";
-
-
-
-
-
-
-
-
-    // $full_cname =$other_course_input=$current_status_input=$hear_us_input= filter_input(INPUT_POST, "cname", FILTER_SANITIZE_SPECIAL_CHARS);
-    // $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-    // $address = filter_input(INPUT_POST, "caddress", FILTER_SANITIZE_SPECIAL_CHARS);
-    // $phone = filter_input(INPUT_POST, "zip", FILTER_SANITIZE_NUMBER_INT);
-
-    // $new_variable1= empty($_POST['current']) ? $current_status : $current_status_input;
-
-    // $new_variable2= empty($_POST['other_course_input']) ? $other_course : $other_course_input;
-
-    // $new_variable3 = !empty($_POST['cc']) ? $input : $hear_us;
-
-    // echo "/variable 1: \n $new_variable1";
-    // echo "/variable 2: \n $new_variable2";
-    // echo "/variable 3: \n $new_variable3";
-
-
-
-    //     // database crediniate
-//     $db_server = "localhost";
-//     $db_user = "root";
-//     $db_pass = "";
-//     $db_name = "greenefx_enquiry_details";
-//     $con = "";
-//     $con = mysqli_connect(
-//         $db_server,
-//         $db_user,
-//         $db_pass,
-//         $db_name
-//     );
-
-    //     $sql = "INSERT INTO enquiry_data (C_NAME,EMAIL,DOB,PHONE_NO,ADD_NUMBER,C_ADDRESS,F_NAME,M_NAME,GENDER,QUALIFICATION,FEILD_OF_WORK,COURSE)
-//      VALUE()";
-//     if ($con->ping()) {
-//       echo "Successful connection to MySQL!";
-//     } else {
-//       echo "Error: Connection failed (" . $con->connect_errno . ") " . $con->connect_error;
-//     }
-
-    // }
-
-  }
-
+// Function to generate student ID
+function generateStudentID($id)
+{
+  $prefix = "GFX_2K" . date("y")."_";
+  return $prefix . $id;
+}
 
 ?>

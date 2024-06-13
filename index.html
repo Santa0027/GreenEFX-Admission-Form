@@ -353,7 +353,10 @@
               </div>
             </div>
 
-            <div id="response"></div>
+            <div id="response"
+            style="
+            color:aliceblue;
+            "></div>
             <div class="n1">
               <div class="n2">
                 <div class="last">
@@ -387,10 +390,10 @@
         xhr.onload = function() {
             console.log("santha ");
             if (xhr.status === 200) {
-                document.getElementById('response').textContent = "Successfully submitted!";
+                document.getElementById('response').textContent = this.response;
                 document.getElementById('myForm').reset(); 
             } else {
-                document.getElementById('response').textContent = 'An error occurred while submitting the form.';
+                document.getElementById('response').textContent =  this.response;
             }
         };
 
