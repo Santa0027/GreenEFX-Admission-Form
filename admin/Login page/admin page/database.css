@@ -1,0 +1,102 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url(asset/bg_db.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#form {
+    position: relative;
+}
+
+.table {
+    width: 90%;
+    position: relative;
+    margin: auto;
+    background-color: rgb(226, 226, 226);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+table,
+th,
+td {
+    border: 2px solid rgb(107, 105, 105);
+    border-collapse: collapse;
+    padding: 0.5rem 1rem;
+    letter-spacing: 1px;
+    text-align: center;
+    width: 100%;
+    /* margin: auto; */
+}
+
+.logo {
+    position: relative;
+    top: 15px;
+    left: 43%;
+}
+
+.logo img {
+    width: 13%;
+}
+
+.button {
+    background: none;
+    outline: none;
+    border: none;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.search_button {
+    width: 2rem;
+}
+
+.se {
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search {
+    width: 20rem;
+    border-radius: 10px;
+    background-color: transparent;
+    height: 2.5rem;
+    box-shadow: 1px 5px 3px rgb(61, 60, 60);
+    border-width: 0;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.767);
+    padding: 0 1rem;
+    letter-spacing: 1px;
+}
+
+#search:focus {
+    box-shadow: 1px 5px 3px rgb(39, 171, 247);
+    border: none;
+    outline: 0;
+    background-color: rgb(255, 255, 255);
+}
+
+input[type="text"]:focus {
+    border: none;
+}
+
+.se label {
+    font-size: 1.3rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    height: auto;
+    font-family: "Poppins", sans-serif;
+    line-height: 2;
+    letter-spacing: 1px;
+
+}

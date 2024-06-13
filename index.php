@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
 
 
   $first_name = $_POST['first_name'];
@@ -19,6 +19,79 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $qualification = $_POST['qualification'];
   $feild_status = $_POST['feild_status'];
   $course = $_POST['course'];
+  $fees = "";
+$date = date("d/m/Y");
+ 
+
+  function generateStudentID($id)
+  {
+    $prefix = "GFX_2K" . date("Y");
+    return $prefix . $id;
+  }
+
+
+  switch ($course) {
+    case "DTP":
+      //code block
+      $fees = "Rs.6000/-";
+      break;
+    case "DCA":
+      //code block;
+      $fees = "Rs.6000/-";
+      break;
+    case "PGDCA":
+      //code block
+      $fees = "Rs.12,000/-";
+      break;
+    case "DIPLOMA IN GRAPHICS DESIGNING":
+      $fees = "Rs.12,000/-";
+      //code block
+      break;
+    case "DIPLOMA IN WEB DESIGNING":
+      //code block
+      $fees = "Rs.12,000/-";
+      break;
+    case "DIPLOMA IN VIDEO EDITING":
+      //code block
+      $fees = "Rs.12,000/-";
+      break;
+    case "DIPLOMA IN UI/UX DESIGNING":
+      //code block
+      $fees = "Rs.12,000/-";
+      break;
+    case "Graphics Crash Course":
+      //code block
+      $fees = "Rs.16,000/-";
+      break;
+    case "Diploma in 3D & VFX":
+      //code block
+      $fees = "Rs.30,000/-";
+      break;
+    case "Advance Diploma in 3D & VFX":
+      //code block
+      $fees = "Rs.60,000/-";
+      break;
+    case "Specialized in Advance Houdini Effects":
+      //code block
+      $fees = "Rs.1,00,000/-";
+      break;
+    case "Specialized in Advance Digital Crowd":
+      //code block
+      $fees = "Rs.1,00,000/-";
+      break;
+    case "Specialized in Advance Character Effects":
+      //code block
+      $fees = "Rs.1,00,000/-";
+      break;
+    case "Specialized in Advance Character Animation":
+      //code block
+      $fees = "Rs.1,00,000/-";
+      break;
+    default:
+    //code block
+  }
+
+
 
 
   // database crediniate
@@ -38,7 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   }else{
     echo "disconnected";
   }
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+  $last_id = $con->insert_id;
+  $student_id = generateStudentID($last_id);
 
   if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name'])) {
 
@@ -48,16 +124,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $image = file_get_contents($image);
     $image = base64_encode($image);
     
-    $sql = "INSERT INTO student_details(C_NAME,PHOTO,EMAIL,DOB,PHONE_NO,PHONE_2,C_ADDRESS,F_NAME,M_NAME,GENDER,QUALIFICATION,FEILD_OF_WORK,COURSE)
-              VALUE('$full_name','$image','$email','$DOB','$phone','$addi_phone','$address','$f_name','$m_name','$gender','$qualification','$feild_status','$course')";
+    $sql = "INSERT INTO student_details(STUDENT_ID,C_NAME,PHOTO,A_DATE,EMAIL,DOB,PHONE_NO,PHONE_2,C_ADDRESS,F_NAME,M_NAME,GENDER,QUALIFICATION,FEILD_OF_WORK,COURSE,FEES)
+              VALUE('$student_id','$full_name','$image','$date','$email','$DOB','$phone','$addi_phone','$address','$f_name','$m_name','$gender','$qualification','$feild_status','$course','$fess')";
 
   } else {
     // If no image was uploaded, insert data with an empty PHOTO field
-    $sql = "INSERT INTO student_details(C_NAME,PHOTO,EMAIL,DOB,PHONE_NO,PHONE_2,C_ADDRESS,F_NAME,M_NAME,GENDER,QUALIFICATION,FEILD_OF_WORK,COURSE)
-              VALUE('$full_name',' ','$email','$DOB','$phone','$addi_phone','$address','$f_name','$m_name','$gender','$qualification','$feild_status','$course')";
+    $sql = "INSERT INTO student_details(STUDENT_ID,C_NAME,PHOTO,A_DATE,EMAIL,DOB,PHONE_NO,PHONE_2,C_ADDRESS,F_NAME,M_NAME,GENDER,QUALIFICATION,FEILD_OF_WORK,COURSE,FEES)
+              VALUE('$student_id','$full_name',' ','$date','$email','$DOB','$phone','$addi_phone','$address','$f_name','$m_name','$gender','$qualification','$feild_status','$course','$fees')";
   }
-  // Execute the SQL query (assuming proper error handling)
-//  mysqli_query($con, $sql);
 
   if ($con->query($sql) === TRUE) {
     echo"inserted";
@@ -70,12 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   }
 
 
-  //   $result = mysqli_query($con, $sql);
-  // if ($result) {
-  //   echo "Data inserted successfully!";
-  // } else {
-  //   echo "Error inserting data: " . mysqli_error($con);
-  // }
+  
 
 
 
@@ -92,8 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-
-
+  
 
 
 
