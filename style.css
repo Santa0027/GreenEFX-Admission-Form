@@ -367,3 +367,6 @@ button {
   color: lightblue;
   transform: translateY(-30px);
 }
+input:-webkit-autofill {
+  background-color: none;
+}

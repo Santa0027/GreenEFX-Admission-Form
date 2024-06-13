@@ -19,9 +19,13 @@
           <input type="password" name="password" required />
           <label>Enter your password</label>
         </div>
-        <div id="response"></div>
+        <div id="response" 
+        style ="
+        color:brown;
+        "
+        ></div>
         <div class="forget"></div>
-        <button type="submit">Log In</button>
+        <button type="submit" >Log In</button>
         <img
           style="width: 40%; height: 3rem; margin: auto; margin-top: 2rem"
           src="green_logo.png"
@@ -29,7 +33,7 @@
         />
       </form>
     </div>
-   <!-- <script>
+   <script>
       document.getElementById('myForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
 
@@ -38,16 +42,14 @@
         // Create an AJAX request
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'login.php', true);
-
+    
         xhr.onload = function() {
-          if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            console.log(response);
-            if (response.success) {
-              document.getElementById('response').textContent = "Successfully submitted!";
-              // Optionally redirect or perform other actions upon successful login
+          if (xhr.status === 200) { 
+            console.log(xhr);
+            if (this.response==='"OK"') {
+                window.location.href = "admin page/db.php";
             } else {
-              document.getElementById('response').textContent = 'Incorrect username or password.';
+              document.getElementById('response').textContent = this.response;
               document.getElementById('myForm').reset();
             }
           } else {
@@ -57,7 +59,7 @@
 
         xhr.send(formData); // Send the form data
       });
-    </script> -->
+    </script>
 
   </body>
 </html>

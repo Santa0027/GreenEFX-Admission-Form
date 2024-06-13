@@ -17,13 +17,13 @@
          <div class="container">
             
             <div class="logo">
-                <img src="green_logo.png" class="img" alt="">
+                <img src="asset/green_logo.png" class="img" alt="">
             </div>
             <div class="se">
                  <form method="POST"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="form">
                     <!-- <label for="search" >Search:</label> -->
                     <input type="text" id="search" name="search_term" placeholder="Search :">
-                    <button type="submit" id="search-form" class="button"><img class="search_button" src="observation.png" alt=""></button>
+                    <button type="submit" id="search-form" class="button"><img class="search_button" src="asset/observation.png" alt=""></button>
                 </form>
             </div>
             <div id="ta" >
@@ -101,7 +101,15 @@
                             echo '</div>';
 
                         } else {
-                            echo "<tr><td colspan='2'>No records found</td></tr>";
+                            
+                            echo '<div style= "
+                            position: relative;
+                            padding-top:10rem;
+                            left:42.5%;
+                            font-size: 2rem;
+                            color: white;
+                            "> Data Not Found
+                            </div>';
                         }
                     }
                             // Close connection (optional, PHP automatically closes on script termination)
