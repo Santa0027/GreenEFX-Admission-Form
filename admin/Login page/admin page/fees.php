@@ -55,17 +55,22 @@
                     echo '</tr>';
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<tr>';
-                        
-                        foreach ($row as $key => $value) {
-                           echo "<td>" . htmlspecialchars($value) . "</td>";
-                            }
-                           echo "<td>";
-                           echo '<a name="btn" class="hrefs" href=".php?id='. $row['ID'] .'" class="btn btn-success">View</a> <br>';
-                           echo '<a name="btn" class="hrefs" href="edit.php?id=' . $row['ID'] . '" class="btn btn-success">Edit</a>';
-                           echo "</td>";
-                        }
+                        echo '<td>' . htmlspecialchars($row['ID']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['STUDENT_ID']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['C_NAME']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['COURSE']) . '</td>';
+                        echo '<td id="fees-' . $row['ID'] . '">' . htmlspecialchars($row['FEES']) . '</td>'; // Target for editing fees
+                        echo '<td id="paid-fees-' . $row['ID'] . '">' . htmlspecialchars($row['PAID_FEE']) . '</td>'; // Target for editing paid fees
+                        echo '<td>' . htmlspecialchars($row['BALANCE_FEE']) . '</td>';
+                        // Edit and View links can be combined if desired
+                        echo '<td>';
+                        echo '<a name="btnview" class="hrefs" href="view.php?id=' . $row['ID'] . '" class="btn btn-success">View</a>';
+                        echo '<br>';
+                        echo '<a name="btnedit" class="hrefs" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
+                        echo '</td>';
                         echo '</tr>';
                     }
+                }
 
                     echo '</table>';
                     echo '</div>';
@@ -77,10 +82,7 @@
             </table>
         </div>
 
-<script>
-    var btn=document.getElementsByClassName("button");
-    if()
-</script>
+
 
 
 

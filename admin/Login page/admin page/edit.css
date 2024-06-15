@@ -1,0 +1,82 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url(asset/bg_db.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
+.form{
+    border:1px solid rgb(248, 246, 246);
+    height: 40rem;
+    width: 40rem;
+    position: absolute;
+    right: 33%;
+    top: 15%;
+    
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    gap:3rem;
+}
+ .name h5{
+    color: aliceblue;
+    font-size: 1.5rem;
+    position: relative;
+    left:14rem;
+}
+label{
+    color: aliceblue;
+}
+.stu_id{
+    display: flex;
+    flex-direction: row;
+    /* gap:2rem; */
+    justify-content:space-around;
+}
+.stu_id input{
+    position: relative;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    height:1.7rem;
+}
+.stu_id label{
+    font-size: 1.2rem;
+}
+.stu_id p {
+    padding: 0%;
+    margin: 0%;
+    font-size: 1.2rem;
+    color: aliceblue;
+}
+.fees{
+    position: relative;
+    left: -0.5rem;
+}
+
+.paid{
+    position: relative;
+        left: -1.1rem;
+}
+.balance{
+    position: relative;
+        left: -1.7rem;
+}
+
+.btn{
+    height: 2rem;
+    width: 6.5rem;
+    background-color: rgb(217, 222, 233);
+    border: none;
+    border-radius: 10px;
+}
+.btndiv{
+    padding-left: 40%;
+    padding-top: 6%;
+}
+input[type=text] {
+    color: aliceblue;
+    font-size: 1rem;
+}

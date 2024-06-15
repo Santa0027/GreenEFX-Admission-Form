@@ -60,6 +60,10 @@
                     echo '<th>QUALIFICATION</th>';
                     echo '<th>FEILD OF WORK</th>';
                     echo '<th>COURSE</th>';
+                    echo '<th>FEES</th>';
+                    echo '<th>FEES PAID</th>';
+                    echo '<th>BALANCE FEES</th>';
+                    
                     echo '</tr>';
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<tr>';
