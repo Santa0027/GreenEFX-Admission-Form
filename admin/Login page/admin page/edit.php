@@ -36,7 +36,7 @@
                 <div class="details">
                     <div class="name">
                         <h5>' . $row["C_NAME"] . '</h5>
-                        <hr>
+                        <hr style="margin:0">
                     </div>
                     <div class="stu_id">
                         <label for="stu_id">Student ID:</label>

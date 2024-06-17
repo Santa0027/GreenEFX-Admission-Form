@@ -6,41 +6,58 @@ body {
 }
 
 
+
 .form{
-    border:1px solid rgb(248, 246, 246);
-    height: 40rem;
+    /* border:1px solid rgb(248, 246, 246); */
+    /* height: 40rem; */
     width: 40rem;
     position: absolute;
     right: 33%;
     top: 15%;
+    /* border-radius: 10px; */
     
 }
 .details{
     display: flex;
     flex-direction: column;
-    gap:3rem;
+    gap:3rem 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 7px 20px rgb(0, 0, 0);
 }
+
+.name{
+    background-color: rgb(54, 48, 74);
+    border-radius: 10px 10px 0 0;
+}
+
  .name h5{
     color: aliceblue;
     font-size: 1.5rem;
     position: relative;
     left:14rem;
+    text-transform: capitalize;
+   
 }
 label{
-    color: aliceblue;
+        color: black;
 }
 .stu_id{
     display: flex;
     flex-direction: row;
     /* gap:2rem; */
-    justify-content:space-around;
+    justify-content:space-between;
+    width: 75%;
+    margin: auto;
+    overflow: hidden;
 }
 .stu_id input{
     position: relative;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgb(65, 65, 65);
     height:1.7rem;
+
 }
 .stu_id label{
     font-size: 1.2rem;
@@ -49,34 +66,40 @@ label{
     padding: 0%;
     margin: 0%;
     font-size: 1.2rem;
-    color: aliceblue;
+    color: black;
+    text-transform: capitalize;
 }
-.fees{
+/* .fees{
     position: relative;
     left: -0.5rem;
-}
+} */
 
-.paid{
+/* .paid{
     position: relative;
         left: -1.1rem;
-}
-.balance{
+} */
+/* .balance{
     position: relative;
         left: -1.7rem;
-}
+} */
 
 .btn{
-    height: 2rem;
+    height: 2.5rem;
     width: 6.5rem;
-    background-color: rgb(217, 222, 233);
+    background-color: rgb(227, 233, 217);
     border: none;
     border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 1px 2px 3px gray;
+    font-size: 1rem;
+    font-weight: bold;
 }
 .btndiv{
     padding-left: 40%;
     padding-top: 6%;
 }
 input[type=text] {
-    color: aliceblue;
+    color: rgb(34, 31, 31);
     font-size: 1rem;
+    text-align: right;
 }
