@@ -118,26 +118,16 @@
 
                     echo '<div id = "successMessage" style="
                             position: relative;
-                            padding-top:10rem;
-                            left:42.5%;
+                           
                             font-size: 2rem;
                             color: white;
-                            display:block;
+                            
                             "> Data Not Found
                             </div>';
                 }
 
                 // Close connection (optional, PHP automatically closes on script termination)
                 mysqli_close($con);
-
-
-
-
-
-
-
-                echo '</table>';
-                echo '</div>';
 
 
                 ?>
