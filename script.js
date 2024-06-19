@@ -45,22 +45,6 @@ form.addEventListener('submit', (event) => {
   }
 });
 
-
-//VALIDATION FOR THE PHONE  NUMBER
-
-
-function isValidPhoneNumber(number) {
-  const phoneUtil = require('libphonenumber-js');
-  try {
-    const parsedNumber = phoneUtil.parseAndKeepRawInput(number, 'US');
-    return phoneUtil.isValidNumber(parsedNumber);
-  } catch (error) {
-    return false;
-  }
-}
-
-// THE END
-
 // THE VALIDATION FOR THE STATUS Option
 
 const select = document.getElementById('status_select');
