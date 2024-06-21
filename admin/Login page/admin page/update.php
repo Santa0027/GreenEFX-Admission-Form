@@ -3,7 +3,6 @@
 // Database connection details (replace with your credentials)
 $db_server = "localhost";
 $db_user = "root";
-// Update with a strong password!
 $db_pass = "";
 $db_name = "greenefx_database";
 
@@ -13,47 +12,66 @@ if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-session_start(); // If not essential for this script, consider removing it
+session_start(); // Start session if not already started
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate input (example using basic checks)
     $fees = $_POST['fees'];
     $paid = $_POST['paid'];
+    $id = $_POST["id"];
 
+   
 
-    if (!$fees || !$paid) {
-        echo "Invalid fees or paid amount. Please enter positive numeric values.";
-        exit();
-    }
+    // Fetch current paid fee from the database
+    $fetch_sql = "SELECT PAID_FEE FROM student_details WHERE ID = ?";
+    $stmt_fetch = mysqli_prepare($con, $fetch_sql);
 
-    // Calculate balance
-    $balance = $fees - $paid;
+    if ($stmt_fetch) {
+        mysqli_stmt_bind_param($stmt_fetch, "i", $id);
+        mysqli_stmt_execute($stmt_fetch);
+        mysqli_stmt_bind_result($stmt_fetch, $current_paid_fee);
+        mysqli_stmt_fetch($stmt_fetch);
 
-    // Check if ID parameter exists
-    
-    $id = $_POST["id"];// Assuming ID is retrieved from GET request
-    echo 'sd'.$id;
-    // Prepare and execute SQL statement (prevent SQL injection)
-    $sql = "UPDATE student_details SET FEES = ?, PAID_FEE = ?, BALANCE_FEE = ? WHERE ID = ?";
-    $stmt = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($stmt, "sssi", $fees, $paid, $balance, $id);
-    $result = mysqli_stmt_execute($stmt);
-    
-    if ($result) {
-        echo "Student fees updated successfully!";
+        // Calculate new paid fee and balance fee
+        $new_paid_fee = $current_paid_fee + $paid;
+        $balance_fee = $fees - $new_paid_fee;
+
+        // Close the fetch statement
+        mysqli_stmt_close($stmt_fetch);
+
+        // Update fees in the database
+        $update_sql = "UPDATE student_details SET FEES = ?, PAID_FEE = ?, BALANCE_FEE = ? WHERE ID = ?";
+        $stmt_update = mysqli_prepare($con, $update_sql);
+
+        if ($stmt_update) {
+            mysqli_stmt_bind_param($stmt_update, "dddi", $fees, $new_paid_fee, $balance_fee, $id);
+            $result = mysqli_stmt_execute($stmt_update);
+
+            if ($result) {
+                echo "Student fees updated successfully!";
+            } else {
+                // Enhanced error handling
+                $error_message = mysqli_stmt_error($stmt_update);
+                $error_code = mysqli_stmt_errno($stmt_update);
+
+                // Log the error
+                error_log("Error updating student fees (code: $error_code, message: $error_message)");
+
+                echo "Error updating student fees: $error_message";
+            }
+
+            mysqli_stmt_close($stmt_update); // Close prepared statement for update
+        } else {
+            // Error preparing statement
+            $error_message = mysqli_error($con);
+            echo "Error preparing update statement: $error_message";
+        }
     } else {
-        // Enhanced error handling
-        $error_message = mysqli_stmt_error($stmt);
-        $error_code = mysqli_stmt_errno($stmt);
-
-        // Log the error
-        error_log("Error updating student fees (code: $error_code, message: $error_message)");
-
-        echo "Error updating student fees: $error_message";
+        // Error preparing statement
+        $error_message = mysqli_error($con);
+        echo "Error preparing fetch statement: $error_message";
     }
-
-    mysqli_stmt_close($stmt); // Close prepared statement
 }
-mysqli_close($con); // Close database connection
 
+mysqli_close($con); // Close database connection
 ?>

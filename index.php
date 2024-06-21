@@ -50,29 +50,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   switch ($course) {
     case "dtp":
     case "dca":
-      $fees = "Rs.6000/-";
+      $fees = "6000";
       break;
     case "pgdca":
     case "diploma in graphics designing":
     case "diploma in web designing":
     case "diploma in video editing":
     case "diploma in ui/ux designing":
-      $fees = "Rs.12,000/-";
+      $fees = "12000";
       break;
     case "graphics crash course":
-      $fees = "Rs.16,000/-";
+      $fees = "16000";
       break;
     case "diploma in 3d & vfx":
-      $fees = "Rs.30,000/-";
+      $fees = "30000";
       break;
     case "advance diploma in 3d & vfx":
-      $fees = "Rs.60,000/-";
+      $fees = "60000";
       break;
     case "specialized in advance houdini effects":
     case "specialized in advance digital crowd":
     case "specialized in advance character effects":
     case "specialized in advance character animation":
-      $fees = "Rs.1,00,000/-";
+      $fees = "100000";
       break;
     default:
       $fees = "N/A";
