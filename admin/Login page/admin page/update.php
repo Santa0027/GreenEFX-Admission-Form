@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = mysqli_stmt_execute($stmt_update);
 
             if ($result) {
-                echo "Student fees updated successfully!";
+                echo "<script> window.location.href = 'fees.php';</script>";
             } else {
                 // Enhanced error handling
                 $error_message = mysqli_stmt_error($stmt_update);

@@ -52,7 +52,7 @@
                     </div> 
                     <div class="stu_id paid">
                         <label for="stu_id">Fees Paid:</label>
-                        <input type="text" id = "y" value="'.$row['PAID_FEE'].'" name="paid">
+                        <input type="text" id = "y" value="" placeholder="" name="paid">
                     </div> 
                     <div class="stu_id balance">
                         <label for="stu_id">Fees Balance:</label>
@@ -60,7 +60,7 @@
                     </div> 
                     <div class="btndiv">
                         <input type="hidden" name="id" value="' . $row['ID'] . '">
-                        <button type="submit" class="hrefs btn">Submit</button>
+                        <button type="submit" class="hrefs btn" id="MYsubmit">Submit</button>
                     </div>
 
                 </div>
@@ -76,10 +76,6 @@
 
         ?>
 
-<script>
-    console.log(document.getElementById('tr').value);
-    console.log(document.getElementById('y').value);
-</script>
 
 </body>
 </html>

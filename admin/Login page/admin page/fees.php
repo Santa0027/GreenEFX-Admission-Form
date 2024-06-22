@@ -73,7 +73,7 @@
                         echo '<td>' . htmlspecialchars($row['BALANCE_FEE']) . '</td>';
                         // Edit and View links can be combined if desired
                         echo '<td>';
-                        echo '<a name="btnview" class="hrefs" href="view.php?id=' . $row['ID'] . '" class="btn btn-success">View</a>';
+                        echo '<a name="btnview" class="hrefs" href="view.php?id=' . $row['ID'] . '" class="btn btn-success">invoice</a>';
                         echo '<br>';
                         echo '<a name="btnedit" class="hrefs" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
                         echo '</td>';

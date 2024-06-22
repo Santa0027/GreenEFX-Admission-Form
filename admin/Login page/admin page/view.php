@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
   <style>
     .invoice {
       width: 50%;
@@ -28,6 +29,10 @@
       width: 50%;
       margin: auto;
       text-align: center;
+      font-family: "Roboto Slab", serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
     }
 
     .line {
@@ -97,12 +102,6 @@ mysqli_stmt_execute($stmt);
 
 $result = mysqli_stmt_get_result($stmt);
 
-$sql_FEE = "SELECT FEES_UPDATE FROM fees_log WHERE STUDENT_DETAILS_ID = ? " ;
-$stmt_FEE = mysqli_prepare($con, $sql_FEE);
-  mysqli_stmt_bind_param($stmt_FEE, "i", $student_id);
-  mysqli_stmt_execute($stmt_FEE);
-  $result_FEES = mysqli_stmt_get_result($stmt_FEE);
-
 
   // Check for errors
   if (!$result) {
@@ -110,30 +109,31 @@ $stmt_FEE = mysqli_prepare($con, $sql_FEE);
   } else {
     // Check for rows
     $num_rows = mysqli_num_rows($result);
-    
+
 
     if ($num_rows > 0) {
       // Loop through results
-      $row = mysqli_fetch_assoc($result);
-      $loopcounter=1;
+      $invoice_content = '';
 
+      while ($row = mysqli_fetch_assoc($result)) {
 
-        echo '  <div class="invoice">';
+        echo '  <div class="invoice" style= "margin-top:5rem;">';
         echo '    <div class="details">';
         echo '      <p>Mobile : +91 9840289462</p>';
         echo '      <p>GST No : CDSG0987654321</p>';
         echo '    </div>';
         echo '    <div class="img_container">';
         echo '      <img class="logo" src="asset/green_logo.png" alt="logo" />';
-        echo '      <p>';
+        echo '      <p style="margin: 0">';
         echo '        #508, 1st Floor R.T.O Road, Sathuvachari, <br />';
         echo '        Vellore-632009';
         echo '      </p>';
         echo '    </div>';
+  
         echo '    <div class="line">';
         echo '      <span';
         echo '        ><p>bill no :</p>';
-        echo '        <p>1230</p></span';
+        echo '        <p>'.$row['ID'].'</p></span';
         echo '      >';
         echo '      <span';
         echo '        ><p>date :</p>';
@@ -168,45 +168,15 @@ $stmt_FEE = mysqli_prepare($con, $sql_FEE);
         echo '        <td style="text-align: left; width: 5%; padding: 3px">.00</td>';
         echo '      </tr>';
         echo '';
-      function intToRoman($num)
-      {
-        $map = [
-          1000 => 'M',
-          900 => 'CM',
-          500 => 'D',
-          400 => 'CD',
-          100 => 'C',
-          90 => 'XC',
-          50 => 'L',
-          40 => 'XL',
-          10 => 'X',
-          9 => 'IX',
-          5 => 'V',
-          4 => 'IV',
-          1 => 'I'
-        ];
 
-        $result = '';
-        while ($num > 0) {
-          foreach ($map as $key => $value) {
-            if ($num >= $key) {
-              $result .= $value;
-              $num -= $key;
-              break;
-            }
-          }
-        }
-        return $result;
-      }
-      while ($rowS = mysqli_fetch_assoc($result_FEES)) {
+
         echo '      <tr>';
-        echo '        <td style="text-align: center; width: 5%">' . $row['FDATE'] . '</td>';
-        echo '        <td style="text-align: left; width: 40%">' . intToRoman($loopcounter) . '  Payment</td>';
-        echo '        <td style="text-align: right; width: 40%">' . $rowS['FEES_UPDATE'] . '</td>';
+        echo '        <td style="text-align: center; width: 5%">' . $row['F_DATE'] . '</td>';
+        echo '        <td style="text-align: left; width: 40%">' . $row['COURSE'] . '  Payment</td>';
+        echo '        <td style="text-align: right; width: 40%">' . $row['FEES_UPDATE'] . '</td>';
         echo '        <td style="text-align: left; width: 5%; padding: 3px">.00</td>';
         echo '      </tr>';
-        $loopcounter++;
-      }
+
         echo '      <tr>';
         echo '        <td></td>';
         echo '        <td></td>';
@@ -236,15 +206,17 @@ $stmt_FEE = mysqli_prepare($con, $sql_FEE);
         echo '      <li>Lorem ipsum dolor sit amet consectetur.</li>';
         echo '      <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</li>';
         echo '    </ul>';
+        echo '<a href="pdf.php" class="btn btn-danger" target="_blank">Invoice PDF</a>';
         echo '  </div>';
+
+
        
-
       }
-    } 
-  
+    }
 
 
 
+  }
 
 
 

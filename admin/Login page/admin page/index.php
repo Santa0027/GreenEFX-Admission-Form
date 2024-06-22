@@ -70,7 +70,7 @@
 
                     $search_term = mysqli_real_escape_string($con, $_POST["search_term"]);
 
-                    $stmt = mysqli_prepare($con, "SELECT * FROM student_details WHERE C_NAME LIKE ?");
+                    $stmt = mysqli_prepare($con, "SELECT * FROM student_details WHERE C_NAME OR STUDENT_ID LIKE ?");
                     mysqli_stmt_bind_param($stmt, "s", $search_term);
                     mysqli_stmt_execute($stmt);
                     $result = mysqli_stmt_get_result($stmt);
