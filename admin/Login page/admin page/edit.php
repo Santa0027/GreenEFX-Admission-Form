@@ -3,40 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>updating </title>
+    <title>Document</title>
+     <link rel="stylesheet" href="fees.css">
     <link rel="stylesheet" href="edit.css">
 </head>
 <body>
+    <?php
 
-        <?php
-        session_start();
+    // Database connection details (replace with your actual credentials)
+    $db_server = "localhost";
+    $db_user = "root";
+    $db_pass = "";
+    $db_name = "greenefx_database";
+    
 
-            // Database connection details (replace with your actual credentials)
-            $db_server = "localhost";
-            $db_user = "root";
-            $db_pass = "";
-            $db_name = "greenefx_database";
-
-            // Establish connection
-            $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
-
-            // Check connection status
-            if (!$con) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
+    // Establish connection
+    $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 
 
-
-            $sql="SELECT* FROM student_details WHERE ID='{$_GET["id"]}'";
-            $result=mysqli_query($con,$sql);
-            $row=mysqli_fetch_array($result);
-            echo'
-            <div class="form">
-                <form action="update.php" method = "POST">
+    $sql = "SELECT* FROM student_details WHERE ID='{$_GET["id"]}'";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($result);
+    echo '
+            <div class="form" id= "flotform" style = " z-index:3;">
+                <form action="" method = "POST">
                 <div class="details">
                     <div class="name">
                         <h5>' . $row["C_NAME"] . '</h5>
-                        <hr style="margin:0">
+                        <a id="cancelicon" > <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></a>
                     </div>
                     <div class="stu_id">
                         <label for="stu_id">Student ID:</label>
@@ -46,9 +40,15 @@
                         <label for="stu_id">Course:</label>
                         <P>' . $row["COURSE"] . '</p>
                     </div> 
-                    <div class="stu_id fees">
-                        <label for="stu_id">Fees:</label>
-                        <input type="text" id="tr" value="'.$row['FEES'].'" name= "fees">
+                    <div class="fees">
+                        <label for="">Fees:</label>
+                       <div class=" fee">
+                        <p>' . $row['FEES'] . '</p>
+                         <a href="edit.php?id=' . $_GET["id"] . '&edit=true">
+                        <svg
+                        style="height:1rem;width:1rem;margin:0%;padding:0%;"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V299.6l-94.7 94.7c-8.2 8.2-14 18.5-16.8 29.7l-15 60.1c-2.3 9.4-1.8 19 1.4 27.8H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM549.8 235.7l14.4 14.4c15.6 15.6 15.6 40.9 0 56.6l-29.4 29.4-71-71 29.4-29.4c15.6-15.6 40.9-15.6 56.6 0zM311.9 417L441.1 287.8l71 71L382.9 487.9c-4.1 4.1-9.2 7-14.9 8.4l-60.1 15c-5.5 1.4-11.2-.2-15.2-4.2s-5.6-9.7-4.2-15.2l15-60.1c1.4-5.6 4.3-10.8 8.4-14.9z"/></svg></a>
+                       </div>
                     </div> 
                     <div class="stu_id paid">
                         <label for="stu_id">Fees Paid:</label>
@@ -72,10 +72,6 @@
 
 
 
-
-
-        ?>
-
-
+    ?>
 </body>
 </html>

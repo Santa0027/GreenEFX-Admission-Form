@@ -70,8 +70,8 @@
 
                     $search_term = mysqli_real_escape_string($con, $_POST["search_term"]);
 
-                    $stmt = mysqli_prepare($con, "SELECT * FROM student_details WHERE C_NAME OR STUDENT_ID LIKE ?");
-                    mysqli_stmt_bind_param($stmt, "s", $search_term);
+                    $stmt = mysqli_prepare($con, "SELECT * FROM student_details WHERE C_NAME LIKE ? OR STUDENT_ID LIKE ?");
+                    mysqli_stmt_bind_param($stmt, "ss", $search_term , $search_term);
                     mysqli_stmt_execute($stmt);
                     $result = mysqli_stmt_get_result($stmt);
 
@@ -113,10 +113,9 @@
 
                         }
 
-                    }
-                } else {
+                    } else {
 
-                    echo '<div id = "successMessage" style="
+                        echo '<div id = "successMessage" style="
                             position: relative;
                            
                             font-size: 2rem;
@@ -124,12 +123,12 @@
                             
                             "> Data Not Found
                             </div>';
+                    }
+
+                    // Close connection (optional, PHP automatically closes on script termination)
+                    mysqli_close($con);
+
                 }
-
-                // Close connection (optional, PHP automatically closes on script termination)
-                mysqli_close($con);
-
-
                 ?>
 
 

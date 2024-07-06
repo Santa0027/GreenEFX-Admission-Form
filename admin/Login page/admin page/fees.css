@@ -42,6 +42,8 @@ ul{
     margin: auto;
     border-radius: 10px;
     padding: 1rem;
+    position:absolute;
+    z-index: 0;
 }
 table,
 td,
@@ -153,8 +155,8 @@ input[type="text"]:focus {
 
 }
 
-svg {
-    position: fixed;
+.top-arrow {
+    position: absolute;
     bottom: 1rem;
     right: 3rem;
     width: 1.5rem;
@@ -162,4 +164,24 @@ svg {
     background-color: rgba(0, 0, 0, 0.582);
     padding: 1rem;
     border-radius: 50%;
+}
+.cancel-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    z-index: 6;
+    background-color:black ;
+}
+.name{
+    display: flex;
+    flex-direction: row;
+}
+#cancelicon{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: rgb(54, 48, 74);
+    position: absolute;
+    right:3rem;
+    top:2.5rem;
+
 }
