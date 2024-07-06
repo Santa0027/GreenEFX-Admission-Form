@@ -140,7 +140,7 @@ input[type="text"]:focus {
 .hrefs:hover{
     background-color: rgb(218, 238, 214);
     color: rgb(56, 55, 55);
-    padding: 7px 10%;
+    
 }
 
 .hidden {
@@ -156,7 +156,7 @@ input[type="text"]:focus {
 }
 
 .top-arrow {
-    position: absolute;
+    position:fixed;
     bottom: 1rem;
     right: 3rem;
     width: 1.5rem;
@@ -176,12 +176,11 @@ input[type="text"]:focus {
     display: flex;
     flex-direction: row;
 }
-#cancelicon{
+.icon{
     width: 1.5rem;
     height: 1.5rem;
     background-color: rgb(54, 48, 74);
     position: absolute;
     right:3rem;
     top:2.5rem;
-
 }

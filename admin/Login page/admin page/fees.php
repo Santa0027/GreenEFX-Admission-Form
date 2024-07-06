@@ -79,7 +79,7 @@
                         echo '<td>';
                         echo '<a name="btnview" class="hrefs" href="view.php?id=' . $row['ID'] . '&editfee=true" name = "editfee" class="btn btn-success">invoice</a>';
                         echo '<br>';
-                        echo '<a id="editbtn" class="editbtn hrefs" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
+                        echo '<a id="editbtn-' . $row['ID'] . '" class="editbtn hrefs" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
                         echo '</tr>';
                     }
                 }
@@ -87,8 +87,14 @@
                 echo '</table>';
                 echo '</div>';
                 echo '<div id="flotform"></div>';
-
-
+                //                 echo '
+// <div id="flotform">
+//     <!-- Your form content here -->
+//     <a id="cancel-icon" class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+//         <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></a>
+// </div>
+// ';
+                
 
 
                 ?>
@@ -104,16 +110,8 @@
                     d="M318 177.5c3.8-8.8 2-19-4.6-26l-136-144C172.9 2.7 166.6 0 160 0s-12.9 2.7-17.4 7.5l-136 144c-6.6 7-8.4 17.2-4.6 26S14.4 192 24 192H96l0 288c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32l0-288h72c9.6 0 18.2-5.7 22-14.5z" />
             </svg></a>
 
+        <!-- <script>
 
-
-
-
-
-
-
-
-
-        <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const floatForm = document.getElementById("flotform");
                 const editbtns = document.querySelectorAll(".editbtn");
@@ -125,7 +123,7 @@
                         const url = this.href; // Get the href of the clicked link
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open('GET', url, true);
+                        xhr.open('POST', url, true);
                         xhr.onload = function () {
                             if (xhr.status === 200) {
                                 // Inject the returned HTML into the floatForm container
@@ -133,10 +131,17 @@
                                 floatForm.style.display = "block";
 
                                 // Add event listener to the cancel icon
-                                const cancel = document.getElementById('cancelicon');
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const cancel = document.getElementById('cancel-icon');
 
-                                cancel.addEventListener('click', function () {
-                                    floatForm.style.display = 'none';
+                                    if (cancel) { // Check if cancel icon exists
+                                        cancel.addEventListener('click', function () {
+                                            floatForm.style.display = 'none';
+                                        });
+                                    } else {
+                                        console.error("Cancel icon element not found.");
+                                    }
+
                                 });
 
                             } else {
@@ -147,7 +152,9 @@
                     });
                 });
             });
-        </script>
+
+
+        </script> -->
 </body>
 
 

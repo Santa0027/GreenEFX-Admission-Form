@@ -16,20 +16,20 @@ session_start(); // Start session if not already started
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate input (example using basic checks)
-    $fees = $_POST['fees'];
+
     $paid = $_POST['paid'];
     $id = $_POST["id"];
 
    
 
     // Fetch current paid fee from the database
-    $fetch_sql = "SELECT PAID_FEE FROM student_details WHERE ID = ?";
+    $fetch_sql = "SELECT PAID_FEE,FEES FROM student_details WHERE ID = ?";
     $stmt_fetch = mysqli_prepare($con, $fetch_sql);
 
     if ($stmt_fetch) {
         mysqli_stmt_bind_param($stmt_fetch, "i", $id);
         mysqli_stmt_execute($stmt_fetch);
-        mysqli_stmt_bind_result($stmt_fetch, $current_paid_fee);
+        mysqli_stmt_bind_result($stmt_fetch, $current_paid_fee,$fees);
         mysqli_stmt_fetch($stmt_fetch);
 
         // Calculate new paid fee and balance fee
