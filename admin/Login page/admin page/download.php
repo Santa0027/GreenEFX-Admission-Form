@@ -102,7 +102,7 @@ if ($num_rows > 0) {
                 <tr>
                     <td style='text-align: center; width: 5%'></td>
                     <td style='text-align: left; width: 40%'>Balance</td>
-                    <td style='text-align: right; width: 40%'>{$row['BALANCE_FEE']}</td>
+                    <td style='text-align: right; width: 40%'>{$row['BALANCE']}</td>
                     <td style='text-align: left; width: 5%; padding: 3px'>.00</td>
                 </tr>
             </table>

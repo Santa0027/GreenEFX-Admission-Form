@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .form {
+      form {
         background-color: rgb(192, 255, 179);
         width: 30%;
         margin: auto;
@@ -48,16 +48,10 @@
         height: 2rem;
         border-radius: 1rem;
       }
-      #feeform{
-        position:absolute;
-        z-index: 3;
-      }
     </style>
   </head>
   <body>
-<?php
-echo ' <div id="feeform">
-<form class="form"  action="">
+    <form action="">
       <h2>Edit Fees</h2>
       <div class="box">
         <span class="idsapn"
@@ -73,10 +67,5 @@ echo ' <div id="feeform">
       </div>
       <button name="update" type="submit" value="submit">Update</button>
     </form>
-    </div>';
-
-
-?>
-   
   </body>
 </html>

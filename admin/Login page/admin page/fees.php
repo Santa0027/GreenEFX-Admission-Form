@@ -77,7 +77,7 @@
                         echo '<td>' . htmlspecialchars($row['BALANCE_FEE']) . '</td>';
                         // Edit and View links can be combined if desired
                         echo '<td>';
-                        echo '<a name="btnview" class="hrefs" href="invoice.php?id=' . $row['ID'] .'" name = "editfee" class="btn btn-success">invoice</a>';
+                        echo '<a name="btnview" class="hrefs" href="invoice.php?id=' . $row['ID'] . '&editfee=true" name = "editfee" class="btn btn-success">invoice</a>';
                         echo '<br>';
                         echo '<a id="editbtn-' . $row['ID'] . '" class="editbtn hrefs" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
                         echo '</tr>';
@@ -112,45 +112,69 @@
 
         <script>
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const floatForm = document.getElementById("flotform");
-                const editbtns = document.querySelectorAll(".editbtn");
-
-                editbtns.forEach(editbtn => {
-                    editbtn.addEventListener('click', function (e) {
-                        e.preventDefault();
-
-                        const url = this.href; // Get the href of the clicked link
-
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('POST', url, true);
-                        xhr.onload = function () {
-                            if (xhr.status === 200) {
-                                // Inject the returned HTML into the floatForm container
-                                floatForm.innerHTML = xhr.responseText;
-                                floatForm.style.display = "block";
-
-                                // Add event listener to the cancel icon
-                    
-                                    const cancel = document.getElementById('cancel-icon');
-
-                                    if (cancel) { // Check if cancel icon exists
-                                        cancel.addEventListener('click', function () {
-                                            floatForm.style.display = 'none';
-                                        });
-                                    } else {
-                                        console.error("Cancel icon element not found.");
-                                    }
 
 
-                            } else {
-                                console.error("Failed to load form.");
-                            }
-                        };
-                        xhr.send();
-                    });
-                });
-            });
+
+            // document.addEventListener('DOMContentLoaded', function () {
+            //     const floatForm = document.getElementById("flotform");
+            //     const editbtns = document.querySelectorAll(".editbtn");
+
+            //     editbtns.forEach(editbtn => {
+            //         editbtn.addEventListener('click', function (e) {
+            //             e.preventDefault();
+
+            //             const url = this.href; // Get the href of the clicked link
+
+            //             var xhr = new XMLHttpRequest();
+            //             xhr.open('POST', url, true);
+            //             xhr.onload = function () {
+            //                 if (xhr.status === 200) {
+            //                     // Inject the returned HTML into the floatForm container
+            //                     floatForm.innerHTML = xhr.responseText;
+            //                     floatForm.style.display = "block";
+
+            //                     document.getElementById("MYsubmit").addEventListener("submit", function () {
+            //                         var paidAmount = parseFloat(paidInput);
+            //                         var balanceAmount = parseFloat(balance);
+
+            //                         if (paidAmount > balanceAmount) {
+            //                             document.getElementById("feeWarning").style.display = "block";
+
+            //                         } else {
+            //                             document.getElementById("feeWarning").style.display = "none";
+            //                         }
+
+            //                     });
+
+
+            //                     // Add event listener to the cancel icon
+
+            //                     const cancel = document.getElementById('cancel-icon');
+
+            //                     if (cancel) { // Check if cancel icon exists
+            //                         cancel.addEventListener('click', function () {
+            //                             floatForm.style.display = 'none';
+            //                         });
+            //                     } else {
+            //                         console.error("Cancel icon element not found.");
+            //                     }
+
+
+            //                 } else {
+            //                     console.error("Failed to load form.");
+            //                 }
+            //             };
+            //             xhr.send();
+            //         });
+            //     });
+
+            // });
+            
+
+
+
+
+
 
 
         </script>
