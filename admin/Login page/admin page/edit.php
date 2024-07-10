@@ -56,8 +56,13 @@
                     <div class="fees">
                         <label for="">Fees:</label>
                        <div class=" fee">
-                       <input name="fees" style="display:none" type="text" id="feeinput" value="'.$row["FEE"].'" placeholder="'.$row["FEE"].'">
-                       <p>' . $row['FEES'] . '</p>
+                       <input name="fees" style="display:none" type="text" id="feeinput" placeholder="'.$row["FEE"].'">
+                       <input type="hidden" id="feeid" name="fid" value="' . $row['ID'] . '">
+                       <a id = "feesubmit" href ="ff.php?id='.$row['ID'].'" style="display:none">OK</a>
+                       <p id="avoid" >' . $row['FEES'] . '</p>
+                       <p id="paidfee" >' . $row['PAID_FEE'] . '</p>
+                       <p id="result" ></p>
+
                         <a id="editfee">
                         <svg
                         style="height:1rem;width:1rem;margin:0%;padding:0%;"
@@ -66,6 +71,7 @@
                     </div> 
                     <div class="stu_id paid">
                         <label for="stu_id">Fees Paid:</label>
+
                         <input type="text" id = "paidInput" value="" placeholder="0" name="paid">
                     </div> 
                     <div class="stu_id balance">
@@ -84,6 +90,7 @@
                 </form>
             </div>
         <div id = "response"></div>
+        
 
             
 
@@ -97,13 +104,32 @@
 
    
     <script>
-        const editfee = document.getElementById("editfee");
-        const feeinput = document.getElementById("feeinput");
-        editfee.addEventListener('click',function(){
-                feeinput.style.display="block";
-                console.log("sdf");
+        const edit = document.getElementById(".editfee");
+              edit.forEach(editBtn => {
+                    editBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                            
+                        fetch('fixed.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ href: id })
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                
+                                console.log(data);
+                                floatForm.innerHTML = data;
+                                floatForm.style.display = 'block';
 
-        })
+                                addFormEventListeners();
+                                
+                            })
+                            
+                            // .catch(error => console.error('Error:', error));
+                    });
+                });
 
 
 

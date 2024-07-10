@@ -7,6 +7,7 @@
     <title>fees page</title>
     <link rel="stylesheet" href="fees.css">
     <link rel="stylesheet" href="edit.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -149,13 +150,69 @@
                         // // ... your existing code here
                         // });
                 function addFormEventListeners() {
-                      const editfee = document.getElementById("editfee");
+
+
+                    
+                    const feesubmit = document.getElementById("feesubmit");
+                    const avoidid = document.getElementById("avoid");
+                    const editfee = document.getElementById("editfee");
                     const feeinput = document.getElementById("feeinput");
+
+                    
                     editfee.addEventListener('click',function(){
                             feeinput.style.display="block";
-                            console.log("sdf");
+                            avoidid.style.display="none";
+                            feesubmit.style.display="block";
+                            editfee.style.display="none";
+                    
 
-                    })
+                        })
+
+                                                
+                           $(document).ready(function() {
+                            $("#feesubmit").click(function(event) {
+                                event.preventDefault(); // Prevent default form submission
+
+                                // Get form data
+                                var fee_id = $("#feeid").val();
+                                var new_fee = $("#feeinput").val();
+
+                                // Send AJAX request
+                                $.ajax({
+                                type: "POST",
+                                url: "ff.php",  // Replace with your PHP file name
+                                data: {
+                                    fee_id: fee_id,
+                                    new_fee: new_fee
+                                },
+                                success: function(response) {
+                                    $("#result").html(response);
+                                     feeinput.style.display="none";
+                                    //  avoidid.style.display="block";
+                                     feesubmit.style.display="none";
+                                     editfee.style.display="block";
+                                },
+                                error: function(jqXHR, textStatus, errorThrown) {
+                                    console.error("AJAX Error:", textStatus, errorThrown);
+                                    $("#result").html("Error updating fee!");
+                                }
+                                });
+                            });
+                            });
+                                        
+
+
+
+
+
+
+
+
+
+
+                            
+
+                    
                     const cancelIcon = document.getElementById('cancel-icon');
                     if (cancelIcon) {
                         cancelIcon.addEventListener('click', function () {
@@ -170,10 +227,10 @@
                     if (mySubmit) {
                         mySubmit.addEventListener('click', function (e) {
                             const paidInput = document.getElementById('paidInput');
-                            const balance = document.querySelector('.balance p').innerText;
+                            const balance = document.getElementById('.balance p').innerText;
                             const paidAmount = parseFloat(paidInput.value);
                             const balanceAmount = parseFloat(balance);
-                            if (paidAmount > balanceAmount) {
+                            if (paidAmount < balanceAmount) {
                                 e.preventDefault();
                                 document.getElementById('feeWarning').style.display = 'block';
                             } else {
