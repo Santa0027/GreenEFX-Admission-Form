@@ -19,7 +19,7 @@ $student_id = $_GET['id'];
 $sql = "SELECT student_details.*, fees_log.*
         FROM student_details
         INNER JOIN fees_log ON student_details.ID = fees_log.STUDENT_DETAILS_ID
-        WHERE student_details.ID = ?";
+        WHERE fees_log.IID = ?";
 
 // Prepare the statement (prevents SQL injection)
 $stmt = mysqli_prepare($con, $sql);

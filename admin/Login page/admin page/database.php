@@ -20,7 +20,7 @@
          <div class="navbar">
                         <ul class="list">
                             <li><a href="index.php">Home</a></li>
-                            <li><a href="fees.php">Payments</a></li>
+                            <li><a href="fee.php">Payments</a></li>
                             <li><a href="database.php">Total Details</a></li>
                         </ul>
                     </div>
