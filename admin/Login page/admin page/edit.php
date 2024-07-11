@@ -60,7 +60,7 @@
                        <input type="hidden" id="feeid" name="fid" value="' . $row['ID'] . '">
                        <a id = "feesubmit" href ="ff.php?id='.$row['ID'].'" style="display:none">OK</a>
                        <p id="avoid" >' . $row['FEES'] . '</p>
-                       <p id="paidfee" >' . $row['PAID_FEE'] . '</p>
+                       <p id="paidfee" style="display:none">' . $row['PAID_FEE'] . '</p>
                        <p id="result" ></p>
 
                         <a id="editfee">

@@ -1,6 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 use Dompdf\Dompdf;
+
 // Database credentials
 $db_server = "localhost";
 $db_user = "root";
@@ -9,10 +10,10 @@ $db_name = "greenefx_database";
 $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 
 if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
+  die("Connection failed: " . mysqli_connect_error());
 }
 
-// Assuming $student_id is provided securely, e.g., from a POST request
+// Assuming $student_id is provided securely, e.g., from a GET request
 $student_id = $_GET['id'];
 
 // Query to fetch data from the database
@@ -24,6 +25,10 @@ $sql = "SELECT student_details.*, fees_log.*
 // Prepare the statement (prevents SQL injection)
 $stmt = mysqli_prepare($con, $sql);
 
+if (!$stmt) {
+  die("Statement preparation failed: " . mysqli_error($con));
+}
+
 // Bind the parameter (safe way to include user input)
 mysqli_stmt_bind_param($stmt, "i", $student_id);
 
@@ -34,355 +39,170 @@ $result = mysqli_stmt_get_result($stmt);
 
 // Check for errors
 if (!$result) {
-    echo "Error in result: " . mysqli_error($con);
-    exit;
+  die("Error in result: " . mysqli_error($con));
 }
 
 $num_rows = mysqli_num_rows($result);
 
 if ($num_rows > 0) {
-    $invoice_content = '';
+  $invoice_content = '';
 
-    // Assuming usage of a library like Dompdf for PDF generation
-    
+  // Initialize DOMPDF
+  $dompdf = new Dompdf();
 
-    $dompdf = new Dompdf();
+  while ($row = mysqli_fetch_assoc($result)) {
+    $date = date("Y-m-d"); // Assuming the current date for the invoice
+    $img_path = 'data:image/png;base64,' . base64_encode(file_get_contents("asset/green_logo.png"));
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        $invoice_content .= "
-        <div
-      style='width: 50%; margin: auto; border: 1px solid black; padding: 3rem'
-    >
-      <div>
-        <p style='padding: 0; margin: 5px; font-size: 0.8rem'>
-          Mobile : +91 9840289462
-        </p>
-        <p style='padding: 0; margin: 5px; font-size: 0.8rem'>
-          GST No : CDSG0987654321
-        </p>
-      </div>
-      <div style='width: 50%; margin: auto; text-align: center'>
-        <img
-          style='width: 60%; position: relative'
-          src='assert/green_logo.png'
-          alt='logo'
-        />
-        <p>
-          #508, 1st Floor R.T.O Road, Sathuvachari, <br />
-          Vellore-632009
-        </p>
-      </div>
-      <div class='line'>
-        <span
-          ><p>bill no :</p>
-          <p>1230</p></span
-        >
-        <span
-          ><p>date :</p>
-          <p>1/1/2000</p></span
-        >
-      </div>
-      <div
-        style='
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          width: 88%;
-          margin: auto;
-        '
-      >
-        <span style='display: flex; flex-direction: row'
-          ><p>student name :</p>
-          <p>shans</p></span
-        >
-        <span style='display: flex; flex-direction: row'
-          ><p>student id :</p>
-          <p>12345</p></span
-        >
-        <span style='display: flex; flex-direction: row'
-          ><p>course name :</p>
-          <p>3d & vfx</p></span
-        >
-      </div>
-      <table
-        style='
-          width: 90%;
-          margin: auto;
-          border: 1px solid black;
-          border-collapse: collapse;
-        '
-      >
-        <tr>
-          <th style='border: 1px solid black; border-collapse: collapse'>
-            Date
-          </th>
-          <th style='border: 1px solid black; border-collapse: collapse'>
-            Description
-          </th>
-          <th style='border: 1px solid black; border-collapse: collapse'>
-            Amount (Rs)
-          </th>
-          <th style='border: 1px solid black; border-collapse: collapse'>ps</th>
-        </tr>
-        <tr>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-          <td
-            style='
-              text-align: left;
-              width: 40%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          >
-            course fees
-          </td>
-          <td
-            style='
-              text-align: right;
-              width: 40%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          >
-            12,000
-          </td>
-          <td
-            style='
-              text-align: left;
-              width: 5%;
-              padding: 3px;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          >
-            .00
-          </td>
-        </tr>
+    $invoice_content = "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <style>
+                .invoice {
+                    width: 100%;
+                    font-family: Arial, sans-serif;
+                }
+                .details p {
+                    padding: 0;
+                    margin: 5px;
+                    font-size: 0.8rem;
+                }
+                .img_container {
+                    width: 50%;
+                    margin: auto;
+                    text-align: center;
+                }
+                .logo {
+                    width: 60%;
+                    position: relative;
+                }
+                .stu {
+                    width: 100%;
+                    display: flex;
+                    font-size:0.8rem;
+                    position:relative;
+                    top:50%;
+                    
+                }
+                .stu_id{
+                width: 100%;
 
-        <tr>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          >
-            1/1/2000
-          </td>
-          <td
-            style='
-              text-align: left;
-              width: 40%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          >
-            first payment
-          </td>
-          <td
-            style='
-              text-align: right;
-              width: 40%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          >
-            5,000
-          </td>
-          <td
-            style='
-              text-align: left;
-              width: 5%;
-              padding: 3px;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          >
-            .00
-          </td>
-        </tr>
-        <tr>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-        </tr>
-        <tr>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-        </tr>
-        <tr>
-          <td
-            style='
-              text-align: center;
+                   
+                }
+                .studentid2 {
+                    width: 10rem;
+                    position: relative;
+                    left: 45%;
+                }
+                .studentid3 {
+                    position: relative;
+                    left: 80%;
+                }
+                table {
+                    width: 100%;
+                
+                }
+                th, td {
+                    
+                    padding: 8px;
+                    text-align: left;
+                    background-color: #f2f2f2;
+                    
+                }
+                th {
+                    background-color: #f2f2d2;
+                }
+                .terms {
+                    margin-top: 20px;
+                }
+                .terms ul {
+                    list-style-type: none;
+                    padding: 0;
+                }
+                .terms ul li {
+                    margin-bottom: 5px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class='invoice'>
+                <div class='details'>
+                    <p>Mobile: +91 9840289462</p>
+                    <p>GST No: CDSG0987654321</p>
+                </div>
+                <div class='img_container'>
+                    <img class='logo' src='" . $img_path . "' alt='logo' />
+                    <p style='margin: 0'>
+                        #508, 1st Floor R.T.O Road, Sathuvachari,<br />
+                        Vellore-632009
+                    </p>
+                </div>
+                <div class='stu_id' style='display:flex;'>
+                    <span><p style='font-size:0.8rem; margin:0%; padding-top:0%;position: relative;top:5%'><b>Bill No:</b></p><p style='font-size:0.8rem; margin:0%; padding:0%; position:relative;top:8%'>" . $row['ID'] . "</p></span>
+                    <span style='padding:0%; margin:0%; '><p style='font-size:0.8rem; margin:0%; padding:0%;position: relative;left:80%;top:5%'><b>Date:</b></p><p style='font-size:0.8rem; margin:0%; padding:0%; position:relative;top:8%;left:80%;'>" . $date . "</p></span>
+                </div>
+              <div class='stu' style='margin-right:1rem; margin-top:1.5rem;'>
+    <span  ><p style='padding:0%; margin:0%; position: relative;top:20%;'><b>Student Name:</b> " . $row['C_NAME'] . "</p> <p style='padding:0%; margin:0%; position: relative;left: 35%; top:20%;'><b> Student ID:</b> " . $row['STUDENT_ID'] . "</p> <p style='padding:0%; margin:0%; position: relative;left: 65%;top:20%;'><b> Course: </b>" . $row['COURSE'] . "</p></span>
+</div>
+                <table style='padding-top:2rem;'>
+                    <tr>
+                        <th style='border: 3px solid red; padding: 8px; text-align: left;'>Date</th>
+                        <th>Description</th>
+                        <th>Amount (Rs)</th>
+                        <th>PS</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style='border: 3px solid red; padding: 8px; text-align: left;'>Course Fees</td>
+                        <td style='text-align: right;'>" . $row['FEES'] . "</td>
+                        <td>.00</td>
+                    </tr>
+                    <tr>
+                        <td>" . $row['F_DATE'] . "</td>
+                        <td style='text-align: left;'>" . $row['COURSE'] . " Payment</td>
+                        <td style='text-align: right;'>" . $row['FEES_UPDATE'] . "</td>
+                        <td>.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan='4'rowspan='3'></td>
+                        
+                    </tr>
+                    <tr>
+                        
+                    </tr>
+                    <tr>
+                        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style='text-align: left;' rowspan=''>Balance</td>
+                        <td style='text-align: right;'>" . $row['BALANCE'] . "</td>
+                        <td>.00</td>
+                    </tr>
+                </table>
+                <div class='terms'>
+                    <h3>Terms and Conditions</h3>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</li>
+                    </ul>
+                </div>
+            </div>
+        </body>
+        </html>";
+  }
 
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-          <td
-            style='
-              text-align: center;
+  $dompdf->loadHtml($invoice_content);
+  $dompdf->setPaper('A4', 'portrait');
+  $dompdf->render();
 
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-          <td
-            style='
-              text-align: center;
-
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              border-collapse: collapse;
-              padding: 0.5rem 1rem;
-            '
-          ></td>
-        </tr>
-        <tr>
-          <td
-            style='
-              text-align: center;
-              width: 5%;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-            '
-          ></td>
-          <td
-            style='
-              text-align: left;
-              width: 40%;
-              border-right: 1px solid black;
-              padding: 0.5rem 1rem;
-            '
-          >
-            balance
-          </td>
-          <td
-            style='
-              text-align: right;
-              width: 40%;
-              border-collapse: collapse;
-              border-right: 1px solid black;
-              padding: 0.5rem 1rem;
-            '
-          >
-            5,000
-          </td>
-          <td
-            style='
-              text-align: left;
-              width: 5%;
-              padding: 3px;
-              padding: 0.5rem 1rem;
-            '
-          >
-            .00
-          </td>
-        </tr>
-      </table>
-
-      <h3>Terms and Condition</h3>
-      <ul>
-        <li>Lorem ipsum dolor sit amet.</li>
-        <li>Lorem ipsum dolor sit amet consectetur.</li>
-        <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</li>
-      </ul>
-    </div>";
-    }
-
-    $dompdf->loadHtml($invoice_content);
-    $dompdf->setPaper('A4', 'portrait');
-    $dompdf->render();
-    $dompdf->stream("invoice.pdf", array("Attachment" => 1));
+  // Stream the PDF to the browser
+  $dompdf->stream("invoice.pdf", array('Attachment' => 0));
 } else {
-    echo "No records found.";
+  echo "No records found.";
 }
 
 mysqli_close($con);
-
 ?>
-
-
