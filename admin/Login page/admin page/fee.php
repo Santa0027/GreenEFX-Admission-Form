@@ -50,45 +50,139 @@
                     if (!$con) {
                         die("Connection failed: " . mysqli_connect_error());
                     }
-                    $sql = "SELECT ID,STUDENT_ID,C_NAME,COURSE,FEES,PAID_FEE,BALANCE_FEE FROM student_details";
-                    $result = mysqli_query($con, $sql);
-                    if (!$result) {
-                        die("error" . mysqli_error($con));
-                    }
-                    if (mysqli_num_rows($result) > 0) {
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                        echo '<table class="table">';
-                        echo '<tr class = "head_row">';
-                        echo '<th>ID</th>';
-                        echo '<th>STUDENT_ID</th>';
-                        echo '<th>NAME</th>';
-                        echo '<th>COURSE</th>';
-                        echo '<th>FEES</th>';
-                        echo '<th>PAID FEES</th>';
-                        echo '<th>BALANCE FEES</th>';
-                        echo '<th>OPERATION</th>';
-                        echo '</tr>';
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<tr>';
-                            echo '<td>' . htmlspecialchars($row['ID']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['STUDENT_ID']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['C_NAME']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['COURSE']) . '</td>';
-                            echo '<td id="fees-' . $row['ID'] . '">' . htmlspecialchars($row['FEES']) . '</td>'; // Target for editing fees
-                            echo '<td id="paid-fees-' . $row['ID'] . '">' . htmlspecialchars($row['PAID_FEE']) . '</td>'; // Target for editing paid fees
-                            echo '<td>' . htmlspecialchars($row['BALANCE_FEE']) . '</td>';
-                            // Edit and View links can be combined if desired
-                            echo '<td>';
-                            echo '<a name="btnview" class="hrefs" href="invoice.php?id=' . $row['ID'] . '" name = "editfee" class="btn btn-success">invoice</a>';
-                            echo '<br>';
-                            echo '<a id="myLink" class="editbtn hrefs" data-id = "' . $row['ID'] . '" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
-                            echo '</tr>';
+                        $search_term = mysqli_real_escape_string($con, $_POST["search_term"]);
+
+                        $stmt = mysqli_prepare($con, "SELECT * FROM student_details WHERE C_NAME LIKE ? OR STUDENT_ID LIKE ?");
+                        mysqli_stmt_bind_param($stmt, "ss", $search_term, $search_term);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+                    }
+                    if (!empty($_POST["search_term"])) {
+                        if ($result && mysqli_num_rows($result) > 0) {
+
+                                echo '<table class="table">';
+                                echo '<tr class = "head_row">';
+                                echo '<th>ID</th>';
+                                echo '<th>STUDENT_ID</th>';
+                                echo '<th>NAME</th>';
+                                echo '<th>COURSE</th>';
+                                echo '<th>FEES</th>';
+                                echo '<th>PAID FEES</th>';
+                                echo '<th>BALANCE FEES</th>';
+                                echo '<th>OPERATION</th>';
+                                echo '</tr>';
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row['ID'] . '</td>';
+                                    echo '<td>' . $row['STUDENT_ID'] . '</td>';
+                                    echo '<td>' . $row['C_NAME'] . '</td>';
+                                    echo '<td>' . $row['COURSE'] . '</td>';
+                                    echo '<td id="fees-' . $row['ID'] . '">' .$row['FEES'] . '</td>'; // Target for editing fees
+                                    echo '<td id="paid-fees-' . $row['ID'] . '">' . $row['PAID_FEE'] . '</td>'; // Target for editing paid fees
+                                    echo '<td>' . $row['BALANCE_FEE'] . '</td>';
+                                    // Edit and View links can be combined if desired
+                                    echo '<td>';
+                                    echo '<a name="btnview" class="hrefs" href="invoice.php?id=' . $row['ID'] . '" name = "editfee" class="btn btn-success">invoice</a>';
+                                    echo '<br>';
+                                    echo '<a id="myLink" class="editbtn hrefs" data-id = "' . $row['ID'] . '" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
+                                    echo '</tr>';
+                                }
+                            }
+
+                            echo '</table>';
+
+                            echo '<div id="flotform"></div>';
+
+
+
+
+
                         }
-                    }
+                        else{
 
-                    echo '</table>';
+                        $sql_all = "SELECT ID,STUDENT_ID,C_NAME,COURSE,FEES,PAID_FEE,BALANCE_FEE FROM student_details"; 
+                        $result_all = mysqli_query($con, $sql_all);
+                        if (!$result_all) {
+                            die("error" . mysqli_error($con));
+                        }
+                        if (mysqli_num_rows($result_all) > 0) {
+                    
+                            echo '<table class="table">';
+                            echo '<tr class = "head_row">';
+                            echo '<th>ID</th>';
+                            echo '<th>STUDENT_ID</th>';
+                            echo '<th>NAME</th>';
+                            echo '<th>COURSE</th>';
+                            echo '<th>FEES</th>';
+                            echo '<th>PAID FEES</th>';
+                            echo '<th>BALANCE FEES</th>';
+                            echo '<th>OPERATION</th>';
+                            echo '</tr>';
+                            while ($row = mysqli_fetch_assoc($result_all)) {
+                                echo '<tr>';
+                                echo '<td>' . htmlspecialchars($row['ID']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['STUDENT_ID']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['C_NAME']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['COURSE']) . '</td>';
+                                echo '<td id="fees-' . $row['ID'] . '">' . htmlspecialchars($row['FEES']) . '</td>'; // Target for editing fees
+                                echo '<td id="paid-fees-' . $row['ID'] . '">' . htmlspecialchars($row['PAID_FEE']) . '</td>'; // Target for editing paid fees
+                                echo '<td>' . htmlspecialchars($row['BALANCE_FEE']) . '</td>';
+                                // Edit and View links can be combined if desired
+                                echo '<td>';
+                                echo '<a name="btnview" class="hrefs" href="invoice.php?id=' . $row['ID'] . '" name = "editfee" class="btn btn-success">invoice</a>';
+                                echo '<br>';
+                                echo '<a id="myLink" class="editbtn hrefs" data-id = "' . $row['ID'] . '" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
+                                echo '</tr>';
+                            }
+                        }
+                    
+                        echo '</table>';
+                    
+                        echo '<div id="flotform"></div>';
 
-                    echo '<div id="flotform"></div>';
+                        }
+                    
+                    // $sql = "SELECT ID,STUDENT_ID,C_NAME,COURSE,FEES,PAID_FEE,BALANCE_FEE FROM student_details";
+                    // $result = mysqli_query($con, $sql);
+                    // if (!$result) {
+                    //     die("error" . mysqli_error($con));
+                    // }
+                    // if (mysqli_num_rows($result) > 0) {
+
+                    //     echo '<table class="table">';
+                    //     echo '<tr class = "head_row">';
+                    //     echo '<th>ID</th>';
+                    //     echo '<th>STUDENT_ID</th>';
+                    //     echo '<th>NAME</th>';
+                    //     echo '<th>COURSE</th>';
+                    //     echo '<th>FEES</th>';
+                    //     echo '<th>PAID FEES</th>';
+                    //     echo '<th>BALANCE FEES</th>';
+                    //     echo '<th>OPERATION</th>';
+                    //     echo '</tr>';
+                    //     while ($row = mysqli_fetch_assoc($result)) {
+                    //         echo '<tr>';
+                    //         echo '<td>' . htmlspecialchars($row['ID']) . '</td>';
+                    //         echo '<td>' . htmlspecialchars($row['STUDENT_ID']) . '</td>';
+                    //         echo '<td>' . htmlspecialchars($row['C_NAME']) . '</td>';
+                    //         echo '<td>' . htmlspecialchars($row['COURSE']) . '</td>';
+                    //         echo '<td id="fees-' . $row['ID'] . '">' . htmlspecialchars($row['FEES']) . '</td>'; // Target for editing fees
+                    //         echo '<td id="paid-fees-' . $row['ID'] . '">' . htmlspecialchars($row['PAID_FEE']) . '</td>'; // Target for editing paid fees
+                    //         echo '<td>' . htmlspecialchars($row['BALANCE_FEE']) . '</td>';
+                    //         // Edit and View links can be combined if desired
+                    //         echo '<td>';
+                    //         echo '<a name="btnview" class="hrefs" href="invoice.php?id=' . $row['ID'] . '" name = "editfee" class="btn btn-success">invoice</a>';
+                    //         echo '<br>';
+                    //         echo '<a id="myLink" class="editbtn hrefs" data-id = "' . $row['ID'] . '" href="edit.php?id=' . $row['ID'] . '">Edit</a>';
+                    //         echo '</tr>';
+                    //     }
+                    // }
+
+                    // echo '</table>';
+
+                    // echo '<div id="flotform"></div>';
 
 
                     ?>

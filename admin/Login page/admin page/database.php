@@ -77,7 +77,7 @@
                         echo '<tr>';
                         foreach ($row as $key => $value) {
                             if ($key === 'PHOTO') {
-                                echo "<td><img src='data:image;base64,{$value}' alt='Photo' height='100px' width='100px'></td>";
+                                echo "<td><img src='data:image;base64,{$value}' alt='Not available' height='100px' width='100px'></td>";
                             } else {
                                 echo "<td>" . htmlspecialchars($value) . "</td>";
                             }

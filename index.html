@@ -436,3 +436,12 @@
   </body>
   <!-- <script defer src="script.js"></script> -->
 </html>
+
+<!-- 
+BEGIN  
+   IF OLD.PAID_FEE != NEW.PAID_FEE THEN 
+       INSERT INTO fees_log (STUDENT_DETAILS_ID,FEES_UPDATE,BALANCE,F_DATE)
+       VALUES (NEW.ID,NEW.PAID_FEE - OLD.PAID_FEE,NEW.BALANCE_FEE,NOW());
+   END IF;
+
+END -->

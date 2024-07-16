@@ -210,7 +210,7 @@
                 echo '      <li>Lorem ipsum dolor sit amet consectetur.</li>';
                 echo '      <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</li>';
                 echo '    </ul>';
-                echo '<a href="download.php?id=' . $row['IID'] . '" class="btn btn-danger" target="download.php">Invoice PDF</a>';
+                echo '<a href="download.php?id=' . $row['IID'] . '" class="btn btn-danger" target="download.php">Print Invoice</a>';
                 echo '  </div>';
 
 
