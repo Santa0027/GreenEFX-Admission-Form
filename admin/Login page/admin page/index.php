@@ -67,7 +67,7 @@
 
                 // Process search if submitted (use prepared statements for better security)
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+                    
                     $search_term = mysqli_real_escape_string($con, $_POST["search_term"]);
 
                     $stmt = mysqli_prepare($con, "SELECT * FROM student_details WHERE C_NAME LIKE ? OR STUDENT_ID LIKE ?");
