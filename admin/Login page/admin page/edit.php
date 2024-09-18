@@ -137,33 +137,33 @@
 
 
 
-        //   function addFormEventListeners() {
-        //             const cancelIcon = document.getElementById('cancel-icon');
-        //             if (cancelIcon) {
-        //                 cancelIcon.addEventListener('click', function () {
-        //                     container.style.display="block";
-        //                     floatForm.style.display = 'none';
-        //                 });
-        //             } else {
-        //                 console.error("Cancel icon element not found.");
-        //             }
+          function addFormEventListeners() {
+                    const cancelIcon = document.getElementById('cancel-icon');
+                    if (cancelIcon) {
+                        cancelIcon.addEventListener('click', function () {
+                            container.style.display="block";
+                            floatForm.style.display = 'none';
+                        });
+                    } else {
+                        console.error("Cancel icon element not found.");
+                    }
 
-        //             const mySubmit = document.getElementById('MYsubmit');
-        //             if (mySubmit) {
-        //                 mySubmit.addEventListener('click', function (e) {
-        //                     const paidInput = document.getElementById('paidInput');
-        //                     const balance = document.querySelector('.balance p').innerText;
-        //                     const paidAmount = parseFloat(paidInput.value);
-        //                     const balanceAmount = parseFloat(balance);
-        //                     if (paidAmount > balanceAmount) {
-        //                         e.preventDefault();
-        //                         document.getElementById('feeWarning').style.display = 'block';
-        //                     } else {
-        //                         document.getElementById('feeWarning').style.display = 'none';
-        //                     }
-        //                 });
-        //             }
-        //         }
+                    const mySubmit = document.getElementById('MYsubmit');
+                    if (mySubmit) {
+                        mySubmit.addEventListener('click', function (e) {
+                            const paidInput = document.getElementById('paidInput');
+                            const balance = document.querySelector('.balance p').innerText;
+                            const paidAmount = parseFloat(paidInput.value);
+                            const balanceAmount = parseFloat(balance);
+                            if (paidAmount > balanceAmount) {
+                                e.preventDefault();
+                                document.getElementById('feeWarning').style.display = 'block';
+                            } else {
+                                document.getElementById('feeWarning').style.display = 'none';
+                            }
+                        });
+                    }
+                }
     </script>
 
 
