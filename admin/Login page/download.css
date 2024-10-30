@@ -1,0 +1,55 @@
+  .invoice {
+      width: 50%;
+      margin: auto;
+      border: 1px solid black;
+      padding: 3rem;
+  }
+
+  .details p {
+      padding: 0;
+      margin: 5px;
+      font-size: 0.8rem;
+  }
+
+  .logo {
+      width: 60%;
+      position: relative;
+  }
+
+  .img_container {
+      width: 50%;
+      margin: auto;
+      text-align: center;
+      font-family: "Roboto Slab", serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      border-color: red;
+  }
+
+  .line {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 88%;
+      margin: auto;
+      
+  }
+
+  .line span {
+      display: flex;
+      flex-direction: row;
+  }
+
+  table,
+  th {
+      border: 1px solid black;
+      border-collapse: collapse;
+  }
+
+  td {
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+      border-collapse: collapse;
+      padding: 0.5rem 1rem;
+  }
