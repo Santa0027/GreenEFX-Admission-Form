@@ -1,5 +1,25 @@
 <?php
 
+
+
+
+session_start();
+
+// Set timeout period in seconds (e.g., 1800 seconds = 30 minutes)
+$timeout_duration = 1800;
+
+// Check if the timeout key exists in session
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php"); // Redirect to login page
+    exit();
+}
+
+// Update last activity time
+$_SESSION['LAST_ACTIVITY'] = time();
+
+
 // Database connection details
 $db_server = "localhost";
 $db_user = "root";

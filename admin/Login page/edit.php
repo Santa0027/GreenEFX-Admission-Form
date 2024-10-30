@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    
     <?php
 
     // Database connection details (replace with your actual credentials)

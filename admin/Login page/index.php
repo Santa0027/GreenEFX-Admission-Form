@@ -15,6 +15,17 @@
 </head>
 
 <body>
+<?php
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../../index.html");// Redirect to login page if not logged in
+    exit();
+}
+
+// Your protected content here
+echo "Welcome, " . $_SESSION['username'];
+?>
 
     <div class="container">
 
@@ -46,7 +57,13 @@
         <div id="ta">
             <table id="s" class="hidden">
                 <?php
-                session_start();
+                
+
+ 
+
+// Check if the user is logged in
+
+
 
                 // Database connection details (replace with your actual credentials)
                 $db_server = "localhost";

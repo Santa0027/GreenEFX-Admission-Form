@@ -23,7 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($row["PASSWORD"] === $password) { // Use lowercase for case-insensitive comparison
            
+            $_SESSION['username'] = $username;
+            $_SESSION['logged_in'] = true;
+            
             $response = "OK";
+
         } else {
             $response ="Invalid username or password";
         }

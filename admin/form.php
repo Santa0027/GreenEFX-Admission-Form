@@ -15,6 +15,17 @@
   </head>
 
   <body>
+  <?php
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+  header("Location: ../../index.html");// Redirect to login page if not logged in
+    exit();
+}
+
+?>
+
+
     <div class="container">
         <!-- Link styled as a button -->
         <a href="Login page/index.php" class="transparent-btn">manage</a>

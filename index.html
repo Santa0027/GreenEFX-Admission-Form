@@ -47,7 +47,7 @@
           if (xhr.status === 200) { 
             console.log(xhr);
             if (this.response==='"OK"') {
-                window.location.href = "admin/form.html";
+                window.location.href = "admin/form.php";
             } else {
               document.getElementById('response').textContent = this.response;
               document.getElementById('myForm').reset();

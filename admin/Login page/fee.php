@@ -11,6 +11,19 @@
 </head>
 
 <body>
+
+<?php
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../../index.html");// Redirect to login page if not logged in
+    exit();
+}
+
+// Your protected content here
+echo "Welcome, " . $_SESSION['username'];
+?>
+
     <div class="container" id="container">
         <div id="main">
 
@@ -34,7 +47,7 @@
             <div id="ta">
                 <table id="s" class="hidden">
                     <?php
-                    session_start();
+                  
 
                     // Database connection details (replace with your actual credentials)
                     $db_server = "localhost";
@@ -257,7 +270,7 @@
                     editfee.style.display = "none";
                     paidfee.style.display = "none";
                 })
-                avoidid.style.display = "block";
+                // avoidid.style.display = "none";
                 $(document).ready(function () {
                     $("#feesubmit").click(function (event) {
                         event.preventDefault(); // Prevent default form submission

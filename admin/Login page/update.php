@@ -1,5 +1,7 @@
 <?php
 
+
+
 // Database connection details (replace with your credentials)
 $db_server = "localhost";
 $db_user = "root";

@@ -1,8 +1,13 @@
 body {
     font-family: "Poppins", sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url(asset/bg_db.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url(asset/green_logo.png);
     background-size: cover;
     background-attachment: fixed;
+}
+
+
+.editbtn{
+    background-color: rgb(243, 184, 106);
 }
 
 #form {

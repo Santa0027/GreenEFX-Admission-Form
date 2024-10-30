@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="database.css">
 </head>
 <body>
+<?php
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../../index.html");// Redirect to login page if not logged in
+    exit();
+}
+
+// Your protected content here
+echo "Welcome, " . $_SESSION['username'];
+?>
+
+
          <div class="container">
             
             <div class="se">
@@ -29,8 +42,7 @@
         <div id="ta">
             <table id="s" class="hidden">
                 <?php
-                session_start();
-
+              
                 // Database connection details (replace with your actual credentials)
                 $db_server = "localhost";
                 $db_user = "root";
@@ -104,6 +116,8 @@
 <form method="post" action="excelsheet.php">
     <button type="submit" name="download_excel" id ="downloadLink">Download Excel</button>
 </form>
+
+<a href="logout.php">Logout</a>
 
 
 

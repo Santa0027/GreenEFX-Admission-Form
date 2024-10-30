@@ -82,8 +82,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Print the fees value for debugging
 
-  // Check if an image was uploaded
   if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name'])) {
+    // Check the file size (max 3MB = 3 * 1024 * 1024 bytes)
+    $maxFileSize = 3 * 1024 * 1024; // 3MB
+    $fileSize = $_FILES['image']['size'];
+
+    if ($fileSize > $maxFileSize) {
+      die("Uploaded image size exceeds 3MB limit.");
+    }
+
+    // Read the image file and encode it to base64
     $image = file_get_contents($_FILES['image']['tmp_name']);
     $image = base64_encode($image);
   } else {
