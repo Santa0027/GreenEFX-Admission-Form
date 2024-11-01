@@ -64,7 +64,7 @@
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="form">
                     <input type="text" id="search" name="search_term" placeholder="Search :">
                     <button type="submit" id="search-form" class="button">
-                        <img class="search_button" src="./asset/observation.png" alt="Search">
+                        <img class="search_button" src="./asset/magnifier.png" alt="Search">
                     </button>
                 </form>
             </div>
@@ -97,9 +97,12 @@
                         echo '<span><p class="label">12) Course </p> <p class="values">: ' . $row["COURSE"] . '</p></span>';
                         echo "</div>";
                         // Add a download button for each student
-                        echo '<button class="download-button" onclick="downloadReport(\'reportItem_' . $row['STUDENT_ID'] . '\')">Download Report</button>';
+
                         echo "</div>";
+                    echo '<button class="download-button" onclick="downloadReport(\'reportItem_' . $row['STUDENT_ID'] . '\')">Download Report</button>';
+
                     }
+
                 } else {
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo '<div class="report">Data Not Found</div>';
@@ -114,17 +117,51 @@
     </div>
 
     <script>
-        function downloadReport(reportId) {
-            const reportContent = document.getElementById(reportId).innerHTML;
-            const reportWindow = window.open('', 'PRINT', 'height=600,width=800');
-            reportWindow.document.write('<html><head><title>Student Report</title>');
-            reportWindow.document.write('<link rel="stylesheet" href="report.css">'); // Include CSS for styling
-            reportWindow.document.write('</head><body>');
-            reportWindow.document.write(reportContent);
-            reportWindow.document.write('</body></html>');
-            reportWindow.document.close();
-            reportWindow.print();
-        }
+function downloadReport(reportId) {
+    // Get the entire content of the specific report
+    const reportContent = document.getElementById(reportId).innerHTML;
+    
+    // Open a new window for printing
+    const reportWindow = window.open('', 'PRINT', 'height=700,width=800');
+
+    reportWindow.document.write(`
+        <html>
+        <head>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+            <style>
+                body { font-family: 'Poppins', sans-serif; background-color: #fff; margin: 0; padding: 20px; }
+                .report-container { width: 90%; margin: auto; padding: 2rem; background-color: #fff; border-radius: 8px; 
+                                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+                h1 { text-align: center; color: #333; margin-bottom: 20px; }
+                img { display: block; margin: 0 auto 20px; padding: 0.7rem; border: 1px solid black; border-radius: 8px; 
+                      height: 100px; width: 100px; }
+                .detail-row { margin-bottom: 5px; width: 90%; margin: auto; }
+                .label { font-weight: bold; color: #555; }
+                span{     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    padding:0%;
+    height:50;}
+                .values {  width: 50%; padding-left:10px; color: rgb(3, 74, 51); text-transform: capitalize; }
+            </style>
+        </head>
+        <body>
+            <div class="report-container">
+                
+                ${reportContent} <!-- Inject the actual report HTML content here -->
+            </div>
+        </body>
+        </html>
+    `);
+
+    reportWindow.document.close(); // Close the document for writing
+    reportWindow.focus();          // Bring the print window to focus
+    reportWindow.print();          // Trigger the print dialog
+}
+
+
     </script>
 </body>
 

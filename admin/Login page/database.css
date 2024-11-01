@@ -103,6 +103,7 @@ td {
 
 .search_button {
     width: 2rem;
+    filter: opacity(0.5);
 }
 
 .se {

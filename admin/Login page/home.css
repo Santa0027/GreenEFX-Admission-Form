@@ -1,10 +1,10 @@
 body {
     font-family: "Poppins", sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)),
-        url(/admin/assert/bg.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url(asset/bg_db.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
+
 
 
 /* download */
@@ -15,6 +15,13 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 20px;
     padding: 20px;
+}
+
+
+
+.report > div {
+    display: flex;
+    flex-direction: column; /* If you want vertical stacking */
 }
 
 /* Header styles for download report */
@@ -284,6 +291,7 @@ td {
 
 .search_button {
     width: 2rem;
+    filter: opacity(0.5);
 }
 
 .se {

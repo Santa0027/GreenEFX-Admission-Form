@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 <!-- <label for="search" >Search:</label> -->
                 <input type="text" id="search" name="search_term" placeholder="Search :">
                 <button type="submit" id="search-form" class="button"><img class="search_button"
-                        src="asset/observation.png" alt=""></button>
+                        src="asset/magnifier.png" alt=""></button>
             </form>
         </div>
          <div class="navbar">

@@ -1,7 +1,6 @@
 body {
     font-family: "Poppins", sans-serif;
-    /* background-image: linear-gradient(rgba(228, 191, 191, 0.26), rgba(0, 0, 0, 0.26)), url(asset/istockphoto-1050066346-1024x1024.jpg); */
-    background-color: rgba(88, 177, 95, 0.658);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url(asset/bg_db.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -98,6 +97,7 @@ td {
 
 .search_button {
     width: 2rem;
+    filter: opacity(0.5);
 }
 
 .se {
@@ -118,6 +118,7 @@ td {
     background-color: rgba(255, 255, 255, 0.767);
     padding: 0 1rem;
     letter-spacing: 1px;
+    text-align: start;
 }
 
 #search:focus {
@@ -126,7 +127,6 @@ td {
     outline: 0;
     background-color: rgb(255, 255, 255);
 }
-
 input[type="text"]:focus {
     border: none;
 }
