@@ -6,6 +6,193 @@ body {
     background-attachment: fixed;
 }
 
+
+/* download */
+/* Styles for Download Report Only */
+.download-report {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+}
+
+/* Header styles for download report */
+.download-report h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px; /* Add spacing below the header */
+}
+
+/* Image styles for download report */
+.download-report img {
+    padding: 0.7rem;
+    border: 1px solid black;
+
+    display: block;
+    margin: 0 auto 20px; /* Margin below the image */
+    border-radius: 8px;
+}
+
+.mainreport{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Label and values for download report */
+.download-report .label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-weight: 700;
+    color: #555;
+
+    margin-bottom: 5px; /* Add spacing below labels */
+    display: inline-block; /* Ensures labels and values are on the same line */
+}
+
+.download-report .values {
+    margin-left: 10px;
+    color: #333;
+}
+
+/* Spacing for each report item */
+.download-report > div {
+    margin-bottom: 15px; /* Add spacing between different sections of the report */
+}
+
+/* Button styles */
+.download-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Responsive styles */
+@media print {
+    .download-button {
+        display: none; /* Hide download buttons when printing */
+    }
+}
+
+/* download end */
+#logoutLink {
+       
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #36304a; /* Green color */
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#logoutLink:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+#logoutLink:active {
+    background-color: #3e8e41; /* Even darker green when clicked */
+}
+
+
+.logout{
+position: absolute;
+margin-top: 1.5rem;
+}
+
+
+
+/* download report */
+
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Container for each report */
+.report {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+}
+
+/* Header styles */
+.report h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Image styles */
+.report img {
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 8px;
+}
+
+/* Label and values */
+.label {
+    font-weight: 700;
+    color: #555;
+}
+
+.values {
+    margin-left: 10px;
+    color: #333;
+}
+
+/* Button styles */
+.download-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Responsive styles */
+@media print {
+    body {
+        background-color: #fff;
+    }
+    .download-button {
+        display: none; /* Hide download buttons when printing */
+    }
+}
+
 .list {
     list-style: none;
     display: flex;
@@ -188,3 +375,19 @@ svg {
     color: rgb(3, 74, 51);
     text-transform: capitalize;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* sample */
+

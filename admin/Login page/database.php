@@ -16,11 +16,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 // Your protected content here
-echo "Welcome, " . $_SESSION['username'];
+// echo "Welcome, " . $_SESSION['username'];
 ?>
 
 
          <div class="container">
+         <span class="logout"><a href="logout.php" id = "logoutLink">Logout</a>
+         </span>
             
             <div class="se">
                  <form method="POST"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="form">
@@ -117,7 +119,6 @@ echo "Welcome, " . $_SESSION['username'];
     <button type="submit" name="download_excel" id ="downloadLink">Download Excel</button>
 </form>
 
-<a href="logout.php">Logout</a>
 
 
 
@@ -127,7 +128,7 @@ echo "Welcome, " . $_SESSION['username'];
         margin-top:2rem;
         display: inline-block;
         padding: 10px 20px;
-        background-color: #4CAF50; /* Green color */
+        background-color: #36304a; /* Green color */
         color: white;
         text-decoration: none;
         font-size: 16px;
@@ -143,6 +144,37 @@ echo "Welcome, " . $_SESSION['username'];
     #downloadLink:active {
         background-color: #3e8e41; /* Even darker green when clicked */
     }
+
+
+
+    #logoutLink {
+       
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #36304a; /* Green color */
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    #logoutLink:hover {
+        background-color: #45a049; /* Darker green on hover */
+    }
+
+    #logoutLink:active {
+        background-color: #3e8e41; /* Even darker green when clicked */
+    }
+
+
+    .logout{
+    position: absolute;
+    margin-top: 1.5rem;
+    }
+
+  
 </style>
 
 

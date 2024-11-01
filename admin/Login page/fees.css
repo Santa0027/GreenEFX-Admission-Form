@@ -1,9 +1,12 @@
 body {
     font-family: "Poppins", sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url(asset/green_logo.png);
+    /* background-image: linear-gradient(rgba(228, 191, 191, 0.26), rgba(0, 0, 0, 0.26)), url(asset/istockphoto-1050066346-1024x1024.jpg); */
+    background-color: rgba(88, 177, 95, 0.658);
     background-size: cover;
     background-attachment: fixed;
 }
+
+
 
 
 .editbtn{

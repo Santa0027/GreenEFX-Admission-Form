@@ -9,6 +9,11 @@ ul {
     margin-top: 0;
 }
 
+
+.logout{
+    position: absolute;
+    margin-top: 1.5rem;
+}
 .list {
     list-style: none;
     display: flex;

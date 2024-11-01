@@ -8,9 +8,41 @@
     <link rel="stylesheet" href="fees.css">
     <link rel="stylesheet" href="edit.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        
+
+#logoutLink {
+       
+       display: inline-block;
+       padding: 10px 20px;
+       background-color: #36304a; /* Green color */
+       color: white;
+       text-decoration: none;
+       font-size: 16px;
+       font-weight: bold;
+       border-radius: 10px;
+       transition: background-color 0.3s ease;
+   }
+   
+   #logoutLink:hover {
+       background-color: #45a049; /* Darker green on hover */
+   }
+   
+   #logoutLink:active {
+       background-color: #3e8e41; /* Even darker green when clicked */
+   }
+   
+   
+   .logout{
+   position: absolute;
+   margin-top: 1.5rem;
+   }
+    </style>
 </head>
 
 <body>
+
 
 <?php
 session_start();
@@ -20,11 +52,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit();
 }
 
-// Your protected content here
-echo "Welcome, " . $_SESSION['username'];
 ?>
 
     <div class="container" id="container">
+
+
+    <span class="logout"><a href="logout.php" id = "logoutLink">Logout</a>
+         </span>    
         <div id="main">
 
             <div class="se">
