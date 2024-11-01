@@ -138,11 +138,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     }
 
     #downloadLink:hover {
-        background-color: #45a049; /* Darker green on hover */
+        color:black;
+        background-color: #FFFFFF; /* Darker green on hover */
     }
 
     #downloadLink:active {
-        background-color: #3e8e41; /* Even darker green when clicked */
+        color:black;
+        background-color: #FFFFFF; /* Even darker green when clicked */
     }
 
 
@@ -161,11 +163,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     }
 
     #logoutLink:hover {
-        background-color: #45a049; /* Darker green on hover */
+        color:black;
+        background-color: #FFFFFF; /* Darker green on hover */
     }
 
     #logoutLink:active {
-        background-color: #3e8e41; /* Even darker green when clicked */
+        color:black;
+        background-color: #ffffff; /* Even darker green when clicked */
     }
 
 
