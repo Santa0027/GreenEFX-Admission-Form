@@ -1,3 +1,6 @@
+
+<?php
+    session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +63,7 @@
 </head>
 <body>
 <?php
-session_start();
+
 include 'config.php';
 // Redirect if not logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {

@@ -1,4 +1,8 @@
+
 <?php
+    session_start();?>
+<?php
+
 require 'vendor/autoload.php';
 include 'config.php';
 use Dompdf\Dompdf;
