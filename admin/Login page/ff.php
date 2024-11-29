@@ -4,6 +4,7 @@
 
 
 session_start();
+include 'config.php';
 
 // Set timeout period in seconds (e.g., 1800 seconds = 30 minutes)
 $timeout_duration = 1800;
@@ -21,10 +22,7 @@ $_SESSION['LAST_ACTIVITY'] = time();
 
 
 // Database connection details
-$db_server = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "greenefx_database";
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $fee_id = $_POST['fee_id'];

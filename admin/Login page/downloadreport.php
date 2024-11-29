@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'config.php';
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: ../../index.html"); // Redirect to login page if not logged in
@@ -15,11 +16,6 @@ $student_id = $_GET['search_term'];
 
 // Database connection
 
-$db_server = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "greenefx_database";
-$con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());

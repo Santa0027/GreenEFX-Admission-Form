@@ -1,9 +1,6 @@
 <?php
 // Database connection details
-$db_server = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "greenefx_database";
+include 'config.php';
 
 // Establish connection
 $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);

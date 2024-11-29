@@ -11,6 +11,7 @@
 <body>
     <?php
     session_start();
+    include 'config.php';
 
     // Redirect to login page if not logged in
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
@@ -21,10 +22,7 @@
 
     // Database connection details
 
-    $db_server = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "greenefx_database";
+ 
 
     // Establish connection
     $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);

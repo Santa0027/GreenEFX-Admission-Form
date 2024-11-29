@@ -1,4 +1,5 @@
 <?php
+ include 'config.php';
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -6,10 +7,7 @@ error_reporting(E_ALL);
 
 // Database credentials
 
-$db_server = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "greenefx_database";
+
 
 // Create a connection
 $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);

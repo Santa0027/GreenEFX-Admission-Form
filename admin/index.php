@@ -1,11 +1,8 @@
 <?php
-
+ include 'config.php';
 // Validate that the request method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $db_server = "localhost";
-  $db_user = "root";
-  $db_pass = "";
-  $db_name = "greenefx_database";
+ 
   // Connect to the database
   $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 

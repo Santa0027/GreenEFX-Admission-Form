@@ -71,14 +71,12 @@
 
 
   <?php
+   include 'config.php';
   $date = date("d/m/Y");
 
   // Database connection details (replace with your actual credentials)
 
-  $db_server = "localhost";
-  $db_user = "root";
-  $db_pass = "";
-  $db_name = "greenefx_database";
+
 
   // Establish connection
   $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
