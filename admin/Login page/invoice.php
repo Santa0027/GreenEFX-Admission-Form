@@ -60,6 +60,12 @@
             border-collapse: collapse;
             padding: 0.5rem 1rem;
         }
+        .fotter{
+            display:flex;
+            flex-direction:row;
+            justify-content:space-between;
+            
+        }
     </style>
 </head>
 
@@ -178,11 +184,15 @@
                 echo '';
                 echo '    <h3>Terms and Condition</h3>';
                 echo '    <ul>';
-                echo '      <li>Lorem ipsum dolor sit amet.</li>';
-                echo '      <li>Lorem ipsum dolor sit amet consectetur.</li>';
-                echo '      <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</li>';
+                echo '      <li>By enrolling in the course, you agree to comply with these terms.</li>';
+                echo '      <li>Payment must be completed before the start of the course. </li>';
+                echo '      <li>No refunds will be provided once the course has commenced.</li>';
+                echo '      <li>Late payments may incur additional charges or result in enrollment cancellation.</li>';
                 echo '    </ul>';
+                echo '     <div class="fotter">';
                 echo '<a href="download.php?id=' . $row['IID'] . '" class="btn btn-danger" target="download.php">Print Invoice</a>';
+                echo '<a>this is a computer generated invoice and requires no signature</a>';
+                echo '</divs>';
                 echo '  </div>';
             }
         } else {
