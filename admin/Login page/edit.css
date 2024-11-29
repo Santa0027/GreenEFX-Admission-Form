@@ -124,3 +124,13 @@ input[type=text] {
     flex-direction: row;
     gap: 1rem;
 }
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 1; /* Ensures calendar UI is visible */
+}
+
+input[type="date"]:invalid {
+    border-color: red;
+    background-color: #fdd; /* Highlight invalid dates */
+}

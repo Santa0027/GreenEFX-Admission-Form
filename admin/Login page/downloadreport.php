@@ -14,6 +14,7 @@ if (!isset($_GET['search_term'])) {
 $student_id = $_GET['search_term'];
 
 // Database connection
+
 $db_server = "localhost";
 $db_user = "root";
 $db_pass = "";

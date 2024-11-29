@@ -20,10 +20,11 @@
     }
 
     // Database connection details
+
     $db_server = "localhost";
-    $db_user = "root";
-    $db_pass = "";
-    $db_name = "greenefx_database";
+$db_user = "root";
+$db_pass = "";
+$db_name = "greenefx_database";
 
     // Establish connection
     $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
@@ -79,7 +80,7 @@
                 if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<div class='report' id='reportItem_" . $row['STUDENT_ID'] . "'>";
-                        echo '<div class="" style="display:flex; flex-direction:row; justify-content:space-evenly; align-items:center; padding-bottom:1rem">';
+                        echo '<div class="head" style="display:flex; flex-direction:row; justify-content:space-evenly; align-items:center; padding-bottom:1rem">';
                         echo "<h1>Student Details</h1>";
                         echo '<img src="data:image;base64,' . $row['PHOTO'] . '" alt="Image Not Available" style="height:200px; width:150px">';
                         echo '</div>';
@@ -87,7 +88,7 @@
                         echo '<span><p class="label">1) Student ID </p> <p class="values">: ' . $row["STUDENT_ID"] . '</p></span>';
                         echo '<span><p class="label">2) Student Name </p> <p class="values">: ' . $row["C_NAME"] . '</p></span>';
                         echo '<span><p class="label">3) Father Name </p> <p class="values">: ' . $row["F_NAME"] . '</p></span>';
-                        echo '<span><p class="label">4) Mother Name </p> <p class="values">: ' . $row["M_NAME"] . '</p></span>';
+                        // echo '<span><p class="label">4) Mother Name </p> <p class="values">: ' . $row["M_NAME"] . '</p></span>';
                         echo '<span><p class="label">5) Email </p> <p class="values" style="text-transform:lowercase">: ' . $row["EMAIL"] . '</p></span>';
                         echo '<span><p class="label">6) Phone Number </p> <p class="values">: ' . $row["PHONE_NO"] . '</p></span>';
                         echo '<span><p class="label">7) Additional Phone Number </p> <p class="values">: ' . $row["PHONE_2"] . '</p></span>';
@@ -123,14 +124,14 @@ function downloadReport(reportId) {
     const reportContent = document.getElementById(reportId).innerHTML;
     
     // Open a new window for printing
-    const reportWindow = window.open('', 'PRINT', 'height=700,width=800');
+    const reportWindow = window.open('', 'PRINT', 'height=650,width=800');
 
     reportWindow.document.write(`
         <html>
         <head>
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
             <style>
-                body { font-family: 'Poppins', sans-serif; background-color: #fff; margin: 0; padding: 20px; }
+                body { font-family: 'Poppins', sans-serif; background-color: #fff; margin: 0; padding: 10px; }
                 .report-container { width: 90%; margin: auto; padding: 2rem; background-color: #fff; border-radius: 8px; 
                                     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
                 h1 { text-align: center; color: #333; margin-bottom: 20px; }
@@ -138,6 +139,7 @@ function downloadReport(reportId) {
                       height: 100px; width: 100px; }
                 .detail-row { margin-bottom: 5px; width: 90%; margin: auto; }
                 .label { font-weight: bold; color: #555; }
+            
                 span{     display: flex;
     flex-direction: row;
     justify-content: space-between;

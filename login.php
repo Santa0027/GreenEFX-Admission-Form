@@ -5,7 +5,7 @@ $db_user = "root";
 $db_pass = "";
 $db_name = "greenefx_database";
 header('Content-Type: application/json; charset=utf-8');
-session_start();
+session_start();  
 $row='';
 // Establish connection
 $con = mysqli_connect($db_server, $db_user, $db_pass, $db_name);

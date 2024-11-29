@@ -101,6 +101,35 @@ td {
     cursor: pointer;
 }
 
+
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #36304a;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #FFFFFF;
+    color: black;
+}
+
+.pagination .current {
+    background-color: #d4af37;
+    color: black;
+    pointer-events: none;
+}
+
+
 .search_button {
     width: 2rem;
     filter: opacity(0.5);

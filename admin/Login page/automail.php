@@ -6,10 +6,11 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 // Database connection
-$servername = "localhost";
-$username = "root";  // Your database username
-$password = "";  // Your database password
-$dbname = "greenefx_database";  // Your database name
+
+$db_server = "localhost";
+$db_user = "wosyrook_root";
+$db_pass = "GreenEFX@#24";
+$db_name = "wosyrook_greenefx_database";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

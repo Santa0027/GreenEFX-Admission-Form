@@ -250,12 +250,63 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         </svg></a>
 
     <script>
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        const cancelIcon = document.getElementById('cancelIcon');
+        if (cancelIcon) {
+            cancelIcon.addEventListener('click', function () {
+                document.getElementById('floatForm').style.display = 'none';
+            });
+        }
+
+        const mySubmit = document.getElementById('mySubmit');
+        if (mySubmit) {
+            mySubmit.addEventListener('click', function (e) {
+                const paidInput = document.getElementById('paidInput');
+                const balanceFee = document.querySelector('.balance p').innerText;
+                const paidAmount = parseFloat(paidInput.value);
+                const balanceAmount = parseFloat(balanceFee);
+
+                const paymentDate = paymentDateInput.value;
+                if (paymentDate > maxDate || paymentDate < minDateString) {
+                    document.getElementById('response').innerHTML = `<p style="color:red;">Select a valid payment date</p>`;
+                    e.preventDefault();
+                    return;
+                }
+                if (paidAmount > balanceAmount) {
+                    document.getElementById('feeWarning').style.display = 'block';
+                    e.preventDefault();
+                }
+            });
+        }
+    });
+
+
+   
+
+        
         document.addEventListener('DOMContentLoaded', function () {
             const floatForm = document.getElementById("flotform");
             const container = document.getElementById("form");
             const editBtns = document.querySelectorAll(".editbtn");
 
 
+            const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const maxDate = `${yyyy}-${mm}-${dd}`;
+        const minDate = new Date();
+        minDate.setDate(minDate.getDate() - 30);
+        const minDateString = minDate.toISOString().split('T')[0];
+
+        const paymentDateInput = document.getElementById('paymentDate');
+        if (paymentDateInput) {
+            paymentDateInput.setAttribute('max', maxDate);
+            paymentDateInput.setAttribute('min', minDateString);
+        }
             editBtns.forEach(editBtn => {
                 editBtn.addEventListener('click', function (e) {
                     e.preventDefault();

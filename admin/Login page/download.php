@@ -3,6 +3,7 @@ require 'vendor/autoload.php';
 use Dompdf\Dompdf;
 
 // Database credentials
+
 $db_server = "localhost";
 $db_user = "root";
 $db_pass = "";

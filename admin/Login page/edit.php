@@ -36,7 +36,7 @@
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($result);
     echo '
-            <div class="form" id= "flotform" style = " z-index:0;">
+            <div class="form" id= "flotform" style = " display:block z-index:0;">
                 <form id=Myform action="update.php" method = "POST">
                 <div class="details">
                     <div class="name">
@@ -54,6 +54,21 @@
                         <label for="stu_id">Course:</label>
                         <P>' . $row["COURSE"] . '</p>
                     </div> 
+                    
+                        <div class="stu_id date">
+                            <label for="paymentMode">Payment Mode:</label>
+                            <select id="paymentMode" name="paymentMode">
+                                <option value="" disabled selected>Select Payment Mode</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="Debit Card">Debit Card</option>
+                                <option value="UPI">UPI</option>
+                            </select>
+                        </div>
+                        <div class="stu_id date">
+                            <label for="paymentDate">Payment Date:</label>
+                            <input type="date" id="paymentDate" name="paymentdate" required>
+                        </div>
                     <div class="fees">
                         <label for="">Fees:</label>
                        <div class=" fee">
@@ -136,33 +151,54 @@
 
 
 
+        document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const maxDate = `${yyyy}-${mm}-${dd}`;
+        const minDate = new Date();
+        minDate.setDate(minDate.getDate() - 30);
+        const minDateString = minDate.toISOString().split('T')[0];
+
+        const paymentDateInput = document.getElementById('paymentDate');
+        if (paymentDateInput) {
+            paymentDateInput.setAttribute('max', maxDate);
+            paymentDateInput.setAttribute('min', minDateString);
+        }
+
+    });
 
 
-          function addFormEventListeners() {
-                    const cancelIcon = document.getElementById('cancel-icon');
-                    if (cancelIcon) {
-                        cancelIcon.addEventListener('click', function () {
-                            container.style.display="block";
-                            floatForm.style.display = 'none';
-                        });
-                    } else {
-                        console.error("Cancel icon element not found.");
-                    }
 
-                    const mySubmit = document.getElementById('MYsubmit');
-                    if (mySubmit) {
-                        mySubmit.addEventListener('click', function (e) {
-                            const paidInput = document.getElementById('paidInput');
-                            const balance = document.querySelector('.balance p').innerText;
-                            const paidAmount = parseFloat(paidInput.value);
-                            const balanceAmount = parseFloat(balance);
-                            if (paidAmount > balanceAmount) {
-                                e.preventDefault();
-                                document.getElementById('feeWarning').style.display = 'block';
-                            } else {
-                                document.getElementById('feeWarning').style.display = 'none';
-                            }
-                        });
+
+
+
+        //   function addFormEventListeners() {
+        //             const cancelIcon = document.getElementById('cancel-icon');
+        //             if (cancelIcon) {
+        //                 cancelIcon.addEventListener('click', function () {
+        //                     container.style.display="block";
+        //                     floatForm.style.display = 'none';
+        //                 });
+        //             } else {
+        //                 console.error("Cancel icon element not found.");
+        //             }
+
+        //             const mySubmit = document.getElementById('MYsubmit');
+        //             if (mySubmit) {
+        //                 mySubmit.addEventListener('click', function (e) {
+        //                     const paidInput = document.getElementById('paidInput');
+        //                     const balance = document.querySelector('.balance p').innerText;
+        //                     const paidAmount = parseFloat(paidInput.value);
+        //                     const balanceAmount = parseFloat(balance);
+        //                     if (paidAmount > balanceAmount) {
+        //                         e.preventDefault();
+        //                         document.getElementById('feeWarning').style.display = 'block';
+        //                     } else {
+        //                         document.getElementById('feeWarning').style.display = 'none';
+        //                     }
+        //                 });
                     }
                 }
     </script>
