@@ -1,6 +1,3 @@
-
-<?php
-    session_start();?>
 <?php
 
 require 'vendor/autoload.php';
@@ -186,11 +183,17 @@ if ($num_rows > 0) {
                 </table>
                 <div class='terms'>
                     <h3>Terms and Conditions</h3>
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet.</li>
-                        <li>Lorem ipsum dolor sit amet consectetur.</li>
-                        <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</li>
-                    </ul>
+                     <ul>';
+                echo '      <li>By enrolling in the course, you agree to comply with these terms.</li>';
+                echo '      <li>Payment must be completed before the start of the course. </li>';
+                echo '      <li>No refunds will be provided once the course has commenced.</li>';
+                echo '      <li>Late payments may incur additional charges or result in enrollment cancellation.</li>';
+                echo '    </ul>';
+                echo '    <hr>';
+                echo '     <div class="fotter">';
+                echo '<a href='download.php?id=" . $row['IID'] . "' class='btn btn-danger' style='display:none;' target='download.php'>Print Invoice</a>';
+                echo '<a>this is a computer generated invoice and requires no signature</a>';
+                echo '</divs>';
                 </div>
             </div>
         </body>
