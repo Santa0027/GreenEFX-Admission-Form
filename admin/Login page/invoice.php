@@ -189,6 +189,7 @@
                 echo '      <li>No refunds will be provided once the course has commenced.</li>';
                 echo '      <li>Late payments may incur additional charges or result in enrollment cancellation.</li>';
                 echo '    </ul>';
+                echo '    <hr>';
                 echo '     <div class="fotter">';
                 echo '<a href="download.php?id=' . $row['IID'] . '" class="btn btn-danger" target="download.php">Print Invoice</a>';
                 echo '<a>this is a computer generated invoice and requires no signature</a>';
