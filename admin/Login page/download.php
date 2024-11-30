@@ -190,7 +190,7 @@ if ($num_rows > 0) {
                 echo '      <li>Late payments may incur additional charges or result in enrollment cancellation.</li>';
                 echo '    </ul>';
                 echo '    <hr>';
-                echo '     <div class="fotter">';
+                echo '     <div class='fotter'>';
                 echo '<a href='download.php?id=" . $row['IID'] . "' class='btn btn-danger' style='display:none;' target='download.php'>Print Invoice</a>';
                 echo '<a>this is a computer generated invoice and requires no signature</a>';
                 echo '</divs>';
